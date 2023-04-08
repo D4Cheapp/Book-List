@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+@import 'normalize.css/normalize.css';
+
+$gunmetal: #292e3d;
+$charcoal: #373F51;
+$emerald: #16C172;
+$ghostWhite: #F2F4FF;
+$aero: #05B2DC;
+$indianRed: #EF5D60;
+
+body{
+  height: 100vh;
+  overflow: hidden;
+  background-color: $gunmetal;
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: $ghostWhite;
+}
+
+:global(div#root){
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

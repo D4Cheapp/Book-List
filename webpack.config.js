@@ -37,16 +37,12 @@ module.exports={
                 use: ["babel-loader"],
             },
             {
-                test: /\.css$/,
-                use: ["style-loader",'css-loader']
-            },
-            {
-                //Компиляция из sass в css
-                test: /\.sсss$/,
+                //Компиляция обработка scss и css
+                test: /\.(scss|css)$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', {
                     loader: 'sass-loader',
                     options: {
-                        additionalData: '@import "src/style.sсss";',
+                        additionalData: '@import "src/style.scss";',
                     }
                 }]
             },
@@ -57,9 +53,16 @@ module.exports={
                     loader: 'file-loader',
                     options: {
                         name: '[path]/[name].[ext]'
+                    }},
+                    {
+                        // Оптимизация всех изображений
+                        loader: "webp-loader",
+                        options: {
+                            quality: 70
+                        }
                     }
-                }]
-            },
+                ]
+            }
         ]
     },
     plugins: [new HtmlWebpackPlugin({
@@ -68,4 +71,4 @@ module.exports={
     }),
         new CleanWebpackPlugin()
     ]
-}
+};

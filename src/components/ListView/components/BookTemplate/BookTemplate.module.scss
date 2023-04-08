@@ -1,0 +1,47 @@
+div.book{
+  width: 100%;
+  height: 80px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+
+  div.titleContainer{
+    display: flex;
+    align-items: center;
+
+    width: 45vw;
+    height: 100%;
+
+    box-sizing: border-box;
+    padding-inline: 2%;
+
+    border: 3px $ghostWhite solid;
+    border-radius: 5px;
+
+    cursor: default;
+    background-color: $charcoal;
+
+    p.title{
+      margin: 0;
+      font-size: 30px;
+    }
+  }
+
+  button.button{
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    background-color: $charcoal;
+    background-repeat: no-repeat;
+
+    border: 3px $ghostWhite solid;
+    border-radius: 5px;
+
+    cursor: pointer;
+    background-size: 50%;
+
+    background-position-x: center;
+    background-position-y: center;
+  }
+}
