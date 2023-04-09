@@ -22,7 +22,7 @@ function localStorageReducer(state = initialState(), action){
 
         case 'EDIT':{
             newStorage = newStorage.map(book => {
-                if (book.id === book.id){
+                if (book.id === action.bookInfo.id){
                     return {
                         ...book,
                         title: action.bookInfo.title,

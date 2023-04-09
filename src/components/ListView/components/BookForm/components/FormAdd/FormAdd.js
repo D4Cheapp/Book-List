@@ -12,21 +12,28 @@ function FormAdd({setFormState}) {
     const descriptionRef = useRef();
     const dateRef = useRef();
 
-
     function onInputChange(event) {
         setInputValue(event.value)
     }
 
     function bookAdd() {
-        const bookInfo ={
-            title: titleRef.current?.value,
-            description: descriptionRef.current?.value,
-            data: dateRef.current?.value,
-            id: Date.now()
-        };
+        if (titleRef.current?.value.trim() &&
+            !dateRef.current?.value.split('').includes('_') ){
 
-        dispatch({type: 'ADD', bookInfo: bookInfo});
-        setFormState(['hide', null]);
+            const bookInfo ={
+                title: titleRef.current?.value.replace(/\s+/gm,' ').trim(),
+                description: descriptionRef.current?.value.replace(/\s+/gm,' ').trim(),
+                data: dateRef.current?.value,
+                id: Date.now()
+            };
+
+            dispatch({type: 'ADD', bookInfo: bookInfo});
+            setFormState(['hide', null]);
+        }
+        else {
+            alert('Пожалуйста правильно введите данные')
+        }
+
     }
 
     return (

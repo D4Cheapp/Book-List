@@ -17,14 +17,22 @@ function FormEdit({bookInfo, setFormState}) {
     }
 
     function editBook() {
-        const bookInfo ={
-            title: titleRef.current?.value,
-            description: descriptionRef.current?.value,
-            data: dateRef.current?.value
-        };
+        if (titleRef.current?.value.trim() &&
+            !dateRef.current?.value.split('').includes('_') ) {
 
-        dispatch({type: 'EDIT', bookInfo: bookInfo});
-        setFormState(['hide', null]);
+            const newBookInfo = {
+                title: titleRef.current?.value.replace(/\s+/gm, ' ').trim(),
+                description: descriptionRef.current?.value.replace(/\s+/gm, ' ').trim(),
+                data: dateRef.current?.value,
+                id: bookInfo.id,
+            };
+
+            dispatch({type: 'EDIT', bookInfo: newBookInfo});
+            setFormState(['hide', null]);
+        }
+        else {
+                alert('Пожалуйста правильно введите данные')
+        }
     }
 
     function deleteBook() {
