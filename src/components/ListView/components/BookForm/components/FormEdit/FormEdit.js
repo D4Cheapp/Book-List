@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import style from './FormEdit.module.scss';
 import InputMask from "react-input-mask";
 import {useDispatch} from "react-redux";
+import formValidation from "../../../../../../utils/formValidation";
 
 function FormEdit({bookInfo, setFormState}) {
     const [inputValue, setInputValue] = useState();
@@ -10,29 +11,11 @@ function FormEdit({bookInfo, setFormState}) {
 
     const titleRef = useRef();
     const descriptionRef = useRef();
-    const dateRef = useRef();
+    const dateFromRef = useRef();
+    const dateToRef = useRef();
 
     function onInputChange(event) {
         setInputValue(event.value)
-    }
-
-    function editBook() {
-        if (titleRef.current?.value.trim() &&
-            !dateRef.current?.value.split('').includes('_') ) {
-
-            const newBookInfo = {
-                title: titleRef.current?.value.replace(/\s+/gm, ' ').trim(),
-                description: descriptionRef.current?.value.replace(/\s+/gm, ' ').trim(),
-                data: dateRef.current?.value,
-                id: bookInfo.id,
-            };
-
-            dispatch({type: 'EDIT', bookInfo: newBookInfo});
-            setFormState(['hide', null]);
-        }
-        else {
-                alert('Пожалуйста правильно введите данные')
-        }
     }
 
     function deleteBook() {
@@ -42,14 +25,40 @@ function FormEdit({bookInfo, setFormState}) {
 
     return (
         <>
-            <input type="text" placeholder='Название книги' defaultValue={bookInfo.title} ref={titleRef}/>
+            <label>
+                Название книги
+                <input type="text" placeholder='Название книги' defaultValue={bookInfo.title} ref={titleRef}/>
+            </label>
 
-            <input type="text" placeholder='Описание' defaultValue={bookInfo.description} ref={descriptionRef}/>
+            <label>
+                Описание
+                <input type="text" placeholder='Описание' defaultValue={bookInfo.description} ref={descriptionRef}/>
+            </label>
 
-            <InputMask mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' defaultValue={bookInfo.date} ref={dateRef}
-                       onChange={onInputChange} value={inputValue}/>
+            <label>
+                Дата начала чтения
+                <InputMask mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' defaultValue={bookInfo.dateFrom} ref={dateFromRef}
+                           onChange={onInputChange} value={inputValue}/>
+            </label>
 
-            <button onClick={editBook}>
+
+            <label>
+                Дата окончания чтения
+                <InputMask mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' defaultValue={bookInfo.dateTo} ref={dateToRef}
+                           onChange={onInputChange} value={inputValue}/>
+            </label>
+
+
+            <button onClick={() => formValidation('EDIT', {
+                title: titleRef.current?.value,
+                description: descriptionRef.current?.value,
+                dateFrom: dateFromRef.current?.value,
+                dateTo: dateToRef.current?.value,
+            }, {
+                setFormState: setFormState,
+                bookInfo: bookInfo,
+                dispatch: dispatch
+            })}>
                 Сохранить
             </button>
 

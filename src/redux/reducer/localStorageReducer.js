@@ -27,7 +27,8 @@ function localStorageReducer(state = initialState(), action){
                         ...book,
                         title: action.bookInfo.title,
                         description: action.bookInfo.description,
-                        date: action.bookInfo.date
+                        dateFrom: action.bookInfo.dateFrom,
+                        dateTo: action.bookInfo.dateTo
                     };
                 }
                 return book;

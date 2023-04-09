@@ -4,17 +4,46 @@ import style from './FormView.module.scss';
 function FormView({bookInfo}) {
     return (
         <>
-            <p>
-                {bookInfo.title}
-            </p>
+            <div>
+                <p>
+                    Название
+                </p>
 
-            <p>
-                {bookInfo.description}
-            </p>
+                <p>
+                    {bookInfo.title}
+                </p>
+            </div>
 
-            <p>
-                {bookInfo.date}
-            </p>
+
+            <div>
+                <p>
+                    Описание
+                </p>
+
+                <p>
+                    {bookInfo.description ? bookInfo.description : '—'}
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    Дата начала чтения
+                </p>
+
+                <p>
+                    {bookInfo.dateFrom ? bookInfo.dateFrom : '—'}
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    Дата окончания чтения
+                </p>
+
+                <p>
+                    {bookInfo.dateTo ? bookInfo.dateTo : '—'}
+                </p>
+            </div>
         </>
     );
 }

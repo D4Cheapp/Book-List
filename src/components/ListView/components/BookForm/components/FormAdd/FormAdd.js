@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import style from './FormAdd.module.scss';
 import InputMask from "react-input-mask";
+import formValidation from "../../../../../../utils/formValidation";
 import {useDispatch} from "react-redux";
 
 function FormAdd({setFormState}) {
@@ -10,42 +11,46 @@ function FormAdd({setFormState}) {
 
     const titleRef = useRef();
     const descriptionRef = useRef();
-    const dateRef = useRef();
+    const dateFromRef = useRef();
+    const dateToRef = useRef();
 
     function onInputChange(event) {
         setInputValue(event.value)
     }
 
-    function bookAdd() {
-        if (titleRef.current?.value.trim() &&
-            !dateRef.current?.value.split('').includes('_') ){
-
-            const bookInfo ={
-                title: titleRef.current?.value.replace(/\s+/gm,' ').trim(),
-                description: descriptionRef.current?.value.replace(/\s+/gm,' ').trim(),
-                data: dateRef.current?.value,
-                id: Date.now()
-            };
-
-            dispatch({type: 'ADD', bookInfo: bookInfo});
-            setFormState(['hide', null]);
-        }
-        else {
-            alert('Пожалуйста правильно введите данные')
-        }
-
-    }
-
     return (
         <>
-            <input type="text" placeholder='Название книги' ref={titleRef}/>
+            <label>
+                Название книги
+                <input type="text" placeholder='Название книги' ref={titleRef}/>
+            </label>
 
-            <input type="text" placeholder='Описание' ref={descriptionRef}/>
+            <label>
+                Описание
+                <input type="text" placeholder='Описание' ref={descriptionRef}/>
+            </label>
 
-            <InputMask mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' ref={dateRef}
-                       onChange={onInputChange} value={inputValue}/>
+            <label>
+                Дата начала чтения
+                <InputMask mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' ref={dateFromRef}
+                           onChange={onInputChange} value={inputValue}/>
+            </label>
 
-            <button onClick={bookAdd}>
+            <label>
+                Дата окончания чтения
+                <InputMask mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' ref={dateToRef}
+                           onChange={onInputChange} value={inputValue}/>
+            </label>
+
+            <button onClick={() => formValidation('ADD', {
+                title: titleRef.current?.value,
+                description: descriptionRef.current?.value,
+                dateFrom: dateFromRef.current?.value,
+                dateTo: dateToRef.current?.value,
+            }, {
+                setFormState: setFormState,
+                dispatch: dispatch
+            })}>
                 Добавить
             </button>
         </>
