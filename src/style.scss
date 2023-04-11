@@ -3,9 +3,11 @@
 
 $gunmetal: #292e3d;
 $charcoal: #373F51;
-$emerald: #16C172;
 $ghostWhite: #F2F4FF;
+
 $aero: #05B2DC;
+$emerald: #16C172;
+$saffron: #F7C331;
 $indianRed: #EF5D60;
 
 body{
@@ -16,6 +18,17 @@ body{
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   color: $ghostWhite;
+
+  ::-webkit-scrollbar{
+    width: 3vh;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background: $ghostWhite;
+    border: 1vh $gunmetal solid;
+    border-radius: 1vw;
+  }
 }
 
 :global(div#root){
@@ -24,4 +37,17 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 800px){
+  body{
+    ::-webkit-scrollbar{
+      width: 3vh;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb{
+    border: none;
+    border-radius: 1vw;
+  }
 }

@@ -7,6 +7,9 @@ function BookForm({formState, setFormState}) {
     const [inputValue, setInputValue] = useState();
 
     const bookInfo = formState[1];
+    const type = formState[0];
+
+    const formReadonly = formState[0] === 'view';
 
     const dispatch = useDispatch();
 
@@ -40,14 +43,14 @@ function BookForm({formState, setFormState}) {
                 dateTo: dateTo,
             };
 
-            if (formState[0] === 'edit'){
-                newBookInfo.id = formState[1].id;
+            if (type === 'edit'){
+                newBookInfo.id = bookInfo.id;
             }
             else {
                 newBookInfo.id = Date.now();
             }
 
-            dispatch({type: formState[0], bookInfo: newBookInfo});
+            dispatch({type: type.toUpperCase(), bookInfo: newBookInfo});
             setFormState(['hide', null]);
         }
         else {
@@ -57,46 +60,50 @@ function BookForm({formState, setFormState}) {
 
     return (
         <>{
-            formState[0] !== 'hide' &&
+            type !== 'hide' &&
 
             <form className={style.form} onSubmit={(event) => event.preventDefault()}>
 
                 <label className={style.label}>
                     Название книги
-                    <input className={style.input} type="text" placeholder='Название книги' ref={titleRef}
-                           defaultValue={!!bookInfo ? bookInfo.title : ''} readOnly={formState[0] === 'view'}/>
+
+                    <input className={style.input} type="text" ref={titleRef}
+                           defaultValue={bookInfo ? bookInfo.title : ''} readOnly={formReadonly}/>
                 </label>
 
                 <label className={style.label}>
                     Описание
-                    <input className={style.input} type="text" placeholder='Описание' ref={descriptionRef}
-                           defaultValue={!!bookInfo ? bookInfo.description : ''} readOnly={formState[0] === 'view'}/>
+
+                    <input className={style.input} type="text" ref={descriptionRef}
+                           defaultValue={bookInfo ? bookInfo.description : ''} readOnly={formReadonly}/>
                 </label>
 
                 <div className={style.date}>
                     <label className={style.label}>
                         Дата начала чтения
+
                         <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
                            ref={dateFromRef} onChange={onInputChange} value={inputValue}
-                                defaultValue={!!bookInfo ? bookInfo.dateFrom : ''} readOnly={formState[0] === 'view'}/>
+                                defaultValue={bookInfo ? bookInfo.dateFrom : ''} readOnly={formReadonly}/>
                     </label>
 
                     <label className={style.label}>
                         Дата окончания чтения
+
                         <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
                            ref={dateToRef} onChange={onInputChange} value={inputValue}
-                                defaultValue={!!bookInfo ? bookInfo.dateTo : ''} readOnly={formState[0] === 'view'}/>
+                                defaultValue={bookInfo ? bookInfo.dateTo : ''} readOnly={formReadonly}/>
                     </label>
                 </div>
 
-                {formState[0] !== 'view' &&
+                {type !== 'view' &&
                     <>
                         <button type='button' className={style.add} onClick={formValidation}>
-                            {formState[0] === 'add' ? 'Добавить' : 'Сохранить'}
+                            {type === 'add' ? 'Добавить' : 'Сохранить'}
                         </button>
 
-                        {formState[0] === 'edit' &&
-                            <button type='button' onClick={deleteBook}>
+                        {type === 'edit' &&
+                            <button className={style.delete} type='button' onClick={deleteBook}>
                                 Удалить
                             </button>
                         }

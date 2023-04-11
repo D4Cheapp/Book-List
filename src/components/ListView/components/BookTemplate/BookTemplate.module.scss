@@ -1,22 +1,24 @@
 div.book{
   width: 100%;
-  height: 80px;
+  min-height: 8vh;
 
   display: inline-flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
   div.titleContainer{
     display: flex;
     align-items: center;
 
-    width: 45vw;
+    overflow: hidden;
+
+    width: calc(100% - 18vh);
     height: 100%;
 
     box-sizing: border-box;
     padding-inline: 2%;
 
-    border: 3px $ghostWhite solid;
+    border: 2px $ghostWhite solid;
     border-radius: 5px;
 
     cursor: default;
@@ -24,7 +26,7 @@ div.book{
 
     p.title{
       margin: 0;
-      font-size: 30px;
+      font-size: 4vh;
     }
   }
 
@@ -35,7 +37,7 @@ div.book{
     background-color: $charcoal;
     background-repeat: no-repeat;
 
-    border: 3px $ghostWhite solid;
+    border: 2px $ghostWhite solid;
     border-radius: 5px;
 
     cursor: pointer;
@@ -43,5 +45,20 @@ div.book{
 
     background-position-x: center;
     background-position-y: center;
+
+    transition: .2s;
+  }
+
+  img.pencil, img.lens{
+    width: 60%;
+    transition: .2s;
+  }
+
+  button.edit:hover{
+    border-color: $saffron;
+  }
+
+  button.view:hover{
+    border-color: $aero;
   }
 }

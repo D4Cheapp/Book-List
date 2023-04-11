@@ -33,6 +33,10 @@ form.form {
     }
   }
 
+  button.add, button.delete{
+
+  }
+
   button.close{
     position: absolute;
     top: 5%;
@@ -77,4 +81,9 @@ form.form {
 
 div.date{
   display: inline-flex;
+}
+
+label.label{
+  display: inline-flex;
+  flex-direction: column;
 }

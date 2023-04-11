@@ -1,4 +1,5 @@
 import {BookTemplate} from "./BookTemplate";
 import {BookForm} from "./BookForm";
+import {Header} from "./Header";
 
-export {BookForm, BookTemplate}
+export {BookForm, BookTemplate, Header}
