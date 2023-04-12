@@ -6,8 +6,8 @@ import {CloseButton, DateContainer, FormButtons} from "./components";
 import clsx from "clsx";
 
 function BookForm() {
-    const {type, bookId} = useParams();
-    const formReadonly = type === 'view';
+    const bookId = useParams().bookId;
+    const isReadonly = ![0,2].includes(Object.keys(useParams()).length);
 
     const titleRef = useRef();
     const descriptionRef = useRef();
@@ -24,7 +24,7 @@ function BookForm() {
                 Название книги
 
                 <input className={style.input} type="text" ref={titleRef}
-                       defaultValue={bookInfo ? bookInfo.title : ''} readOnly={formReadonly}/>
+                       defaultValue={bookInfo ? bookInfo.title : ''} readOnly={isReadonly}/>
             </label>
 
             <DateContainer refs={{dateToRef: dateToRef, dateFromRef: dateFromRef}} bookInfo={bookInfo}/>
@@ -33,16 +33,15 @@ function BookForm() {
                 Описание
 
                 <textarea className={style.input} ref={descriptionRef}
-                       defaultValue={bookInfo ? bookInfo.description : ''} readOnly={formReadonly}/>
+                       defaultValue={bookInfo ? bookInfo.description : ''} readOnly={isReadonly}/>
             </label>
 
-            <FormButtons bookInfo={bookInfo} refs={
-                {
-                    dateToRef: dateToRef,
-                    dateFromRef: dateFromRef,
-                    titleRef: titleRef,
-                    descriptionRef: descriptionRef,
-                }}/>
+            <FormButtons bookInfo={bookInfo} refs={{
+                dateToRef: dateToRef,
+                dateFromRef: dateFromRef,
+                titleRef: titleRef,
+                descriptionRef: descriptionRef,
+            }}/>
 
             <CloseButton/>
         </form>

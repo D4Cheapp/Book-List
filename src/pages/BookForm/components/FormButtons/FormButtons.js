@@ -39,7 +39,7 @@ function FormButtons({refs, bookInfo}) {
 
         newBookInfo.id = type === 'edit' ? bookInfo.id : Date.now();
 
-        dispatch({type: type.toUpperCase(), bookInfo: newBookInfo});
+        dispatch({type: type ? 'EDIT' : 'ADD', bookInfo: newBookInfo});
         navigate('/');
     }
 

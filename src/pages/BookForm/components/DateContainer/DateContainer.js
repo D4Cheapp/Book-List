@@ -19,7 +19,7 @@ function DateContainer({refs, bookInfo}) {
 
                 <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
                        ref={refs.dateFromRef} onChange={onInputChange} value={inputValue}
-                           defaultValue={bookInfo ? bookInfo.dateFrom : ''} readOnly={type === 'view'}/>
+                           defaultValue={bookInfo ? bookInfo.dateFrom : ''} readOnly={!type}/>
             </label>
 
             <label className={style.label}>
@@ -27,7 +27,7 @@ function DateContainer({refs, bookInfo}) {
 
                 <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
                        ref={refs.dateToRef} onChange={onInputChange} value={inputValue}
-                           defaultValue={bookInfo ? bookInfo.dateTo : ''} readOnly={type === 'view'}/>
+                           defaultValue={bookInfo ? bookInfo.dateTo : ''} readOnly={!type}/>
             </label>
         </div>
     );

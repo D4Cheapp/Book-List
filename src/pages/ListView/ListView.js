@@ -21,7 +21,7 @@ function ListView() {
             </div>
 
             <div className={style.buttonContainer}>
-                <button className={style.addButton} onClick={() => navigate('/form/add')}/>
+                <button className={style.addButton} onClick={() => navigate('/book/add')}/>
             </div>
         </section>
     );

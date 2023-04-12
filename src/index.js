@@ -14,11 +14,11 @@ const router = createHashRouter([
         element: <ListView/>
     },
     {
-        path: '/form/add',
+        path: '/book/add',
         element: <BookForm/>
     },
     {
-        path: '/form/:type/:bookId',
+        path: '/book/:bookId/:type?',
         element: <BookForm/>
     }
 ]);
