@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import style from './ListView.module.scss';
 import {useSelector} from "react-redux";
 import {BookForm, BookTemplate, Header} from "./components";
@@ -12,11 +12,13 @@ function ListView() {
     //view - просмотр
     const [formState, setFormState] = useState(['hide', null]);
 
+    const bookContainerRef = useRef();
+
     return (
         <section className={style.listContainer}>
-            <Header/>
+            <Header bookContainerRef={bookContainerRef}/>
 
-            <div className={style.bookContainer}>
+            <div className={style.bookContainer} ref={bookContainerRef}>
                 {state.map(book => <BookTemplate key={book.id} bookInfo={book} setFormState={setFormState}/>)}
             </div>
 
