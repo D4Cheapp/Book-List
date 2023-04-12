@@ -1,36 +1,17 @@
-@mixin inputTemplate(){
-  outline: none;
-  box-sizing: border-box;
-
-  padding-block: 1vh;
-  padding-inline: 2vh;
-
-  font-size: 2.3vh;
-  color: $ghostWhite;
-
-  background: $gunmetal;
-  border: 2px $ghostWhite solid;
-
-  &::placeholder {
-    color: $ghostWhite;
-    opacity: .5;
-  }
-}
-
 form.form {
-  position: absolute;
-  z-index: 2;
+  position: relative;
 
   left: 0;
   top: 0;
 
   display: inline-flex;
   flex-direction: column;
+
   justify-content: space-around;
   align-items: center;
 
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 70%;
 
   background: $charcoal;
   border-radius: 15px;
@@ -71,86 +52,8 @@ label.description{
 }
 
 
-div.date{
-  width: 80%;
-  gap: 10%;
-
-  display: inline-flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  label.label{
-    width: 45%;
-
-    input.input {
-
-    }
-  }
-}
-
-
-div.buttonContainer{
-  width: 80%;
-
-  display: inline-flex;
-  justify-content: space-around;
-
-  button.add, button.delete{
-    width: 30%;
-    height: 5vh;
-
-    cursor: pointer;
-    outline: none;
-
-    background: $gunmetal;
-    border: 2px $ghostWhite solid;
-
-    font-size: 2.5vh;
-    color: $ghostWhite;
-
-    border-radius: 5px;
-    transition: .2s;
-  }
-
-  button.add:hover{
-    border-color: $zomp;
-    color: $zomp;
-  }
-
-  button.delete:hover{
-    border-color: $oldRose;
-    color: $oldRose;
-  }
-}
-
-
-@media screen and (max-width: 1000px){
-  div.date{
-    width: 80%;
-    gap: 2%;
-
-    label.label{
-      width: 50%;
-    }
-  }
-}
-
-
 @media screen and (max-width: 650px){
   label.label{
     font-size: 2vh;
-  }
-
-  div.date{
-    width: 80%;
-    gap: 2%;
-
-    label.label{
-      width: 48%;
-    }
-  }
-
-  div.buttonContainer > button.add, div.buttonContainer > button.delete{
-    width: 40%;
   }
 }
