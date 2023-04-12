@@ -23,14 +23,14 @@ function BookTemplate({bookInfo}) {
             </div>
 
             <button className={clsx(style.button, style.edit)}
-                    style={{backgroundImage: `url(${isEditHover ? ActivePencil : Pencil })`}} onClick={() =>
-                        navigate(`/book/${bookInfo.id}/edit`)} onMouseEnter={() => setEditHover(true)}
-                            onMouseLeave={() => setEditHover(false)}/>
+                style={{backgroundImage: `url(${isEditHover ? ActivePencil : Pencil })`}} onClick={() =>
+                    navigate({pathname: `/book/${bookInfo.id}/`, search: `type=edit`,})}
+                        onMouseEnter={() => setEditHover(true)} onMouseLeave={() => setEditHover(false)}/>
 
             <button className={clsx(style.button, style.view)}
-                    style={{backgroundImage: `url(${isViewHover ? ActiveLens : Lens})`}} onClick={() =>
-                        navigate(`/book/${bookInfo.id}`)} onMouseEnter={() => setViewHover(true)}
-                            onMouseLeave={() => setViewHover(false)}>
+                style={{backgroundImage: `url(${isViewHover ? ActiveLens : Lens})`}} onClick={() =>
+                    navigate(`/book/${bookInfo.id}`)} onMouseEnter={() => setViewHover(true)}
+                        onMouseLeave={() => setViewHover(false)}>
             </button>
         </div>
     );

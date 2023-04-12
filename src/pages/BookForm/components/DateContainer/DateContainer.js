@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import style from './DateContainer.module.scss';
 import InputMask from "react-input-mask";
-import {useParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 function DateContainer({refs, bookInfo}) {
-    const type = useParams().type;
+    const type = useSearchParams()[0].get('type');
 
     const [inputValue, setInputValue] = useState();
 

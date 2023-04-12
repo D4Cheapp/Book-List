@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from "react-redux";
 import store from "./redux/store/store";
 import {createHashRouter, RouterProvider} from "react-router-dom";
-import {BookForm} from "./pages/BookForm";
-import {ListView} from "./pages/ListView";
+import {BookForm, ErrorPage, ListView} from "./pages";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -14,12 +13,18 @@ const router = createHashRouter([
         element: <ListView/>
     },
     {
-        path: '/book/add',
-        element: <BookForm/>
+        path: '/book',
+        element: <BookForm/>,
+        children: [
+            {
+                path: ':bookId/:type?',
+                element: null
+            }
+        ]
     },
     {
-        path: '/book/:bookId/:type?',
-        element: <BookForm/>
+        path: '*',
+        element: <ErrorPage/>
     }
 ]);
 

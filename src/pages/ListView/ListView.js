@@ -1,27 +1,30 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import style from './ListView.module.scss';
 import {useSelector} from "react-redux";
 import {Header} from "./Header";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {BookTemplate} from "./BookTemplate";
 
 function ListView() {
     const state = useSelector(state => state);
 
-    const bookContainerRef = useRef();
-
     const navigate = useNavigate();
+    const filter = useSearchParams()[0].get('search');
 
     return (
         <section className={style.listContainer}>
-            <Header bookContainerRef={bookContainerRef}/>
+            <Header/>
 
-            <div className={style.bookContainer} ref={bookContainerRef}>
-                {state.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
+            <div className={style.bookContainer}>
+                {state.map(book => { return book.title.includes(filter) || !filter ?
+                    <BookTemplate key={book.id} bookInfo={book}/> : ''})}
             </div>
 
             <div className={style.buttonContainer}>
-                <button className={style.addButton} onClick={() => navigate('/book/add')}/>
+                <button className={style.addButton} onClick={() => navigate({
+                    pathname: '/book/',
+                    search: `type=add`,
+                })}/>
             </div>
         </section>
     );

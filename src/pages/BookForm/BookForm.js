@@ -1,13 +1,15 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import style from './BookForm.module.scss';
 import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {CloseButton, DateContainer, FormButtons} from "./components";
 import clsx from "clsx";
 
 function BookForm() {
+    const navigate = useNavigate();
+
     const bookId = useParams().bookId;
-    const isReadonly = ![0,2].includes(Object.keys(useParams()).length);
+    const type = useSearchParams()[0].get('type');
 
     const titleRef = useRef();
     const descriptionRef = useRef();
@@ -17,6 +19,15 @@ function BookForm() {
     const books = useSelector(state => state);
     let bookInfo = books.filter(book => book.id === +bookId)[0];
 
+    useEffect(() => {
+        const isBookInfoExist = !bookInfo && type !== 'add';
+        const isTypeExist = !!type?.trim() && !['edit', 'add'].includes(type);
+
+        if (isBookInfoExist || isTypeExist){
+            navigate('/404');
+        }
+    }, []);
+
     return (
         <form className={style.form} onSubmit={(event) => event.preventDefault()}>
 
@@ -24,7 +35,7 @@ function BookForm() {
                 Название книги
 
                 <input className={style.input} type="text" ref={titleRef}
-                       defaultValue={bookInfo ? bookInfo.title : ''} readOnly={isReadonly}/>
+                       defaultValue={bookInfo ? bookInfo.title : ''} readOnly={!type}/>
             </label>
 
             <DateContainer refs={{dateToRef: dateToRef, dateFromRef: dateFromRef}} bookInfo={bookInfo}/>
@@ -33,7 +44,7 @@ function BookForm() {
                 Описание
 
                 <textarea className={style.input} ref={descriptionRef}
-                       defaultValue={bookInfo ? bookInfo.description : ''} readOnly={isReadonly}/>
+                       defaultValue={bookInfo ? bookInfo.description : ''} readOnly={!type}/>
             </label>
 
             <FormButtons bookInfo={bookInfo} refs={{

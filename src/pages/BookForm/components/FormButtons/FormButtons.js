@@ -1,13 +1,14 @@
 import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 
 function FormButtons({refs, bookInfo}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {type, bookId} = useParams();
+    const type = useSearchParams()[0].get('type');
+    const bookId = useParams().bookId;
 
     function deleteBook() {
         dispatch({type: 'DELETE', id: +bookId});
@@ -45,7 +46,7 @@ function FormButtons({refs, bookInfo}) {
 
     return (
         <>
-            {type !== 'view' &&
+            {!!type &&
                 <div className={style.buttonContainer}>
                     <button type='button' className={style.add} onClick={formValidation}>
                         {type === 'add' ? 'Добавить' : 'Сохранить'}

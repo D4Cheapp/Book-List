@@ -1,21 +1,9 @@
 import React from 'react';
 import style from './Header.module.scss';
+import {useNavigate} from "react-router-dom";
 
-function Header({bookContainerRef}) {
-    function bookFiltering(event) {
-        const books = bookContainerRef.current.childNodes;
-
-        for (let book of books) {
-            const bookTitle = book.firstChild.firstChild.textContent;
-
-            if (bookTitle.includes(event.target.value)){
-                book.setAttribute('style', 'display: inline-flex')
-            }
-            else {
-                book.setAttribute('style', 'display: none')
-            }
-        }
-    }
+function Header() {
+    const navigate = useNavigate();
 
     return (
         <header className={style.header}>
@@ -23,7 +11,8 @@ function Header({bookContainerRef}) {
                 Book list
             </h1>
 
-            <input className={style.input} placeholder='Фильтр' type="text" onInput={bookFiltering}/>
+            <input className={style.input} placeholder='Фильтр' type="text" onInput={(event) =>
+                navigate({pathname: `/`, search: `?search=${event.target?.value}`,})}/>
         </header>
     );
 }
