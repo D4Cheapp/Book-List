@@ -64,10 +64,10 @@ div.buttonContainer{
     transition: .2s;
 
     &:hover{
-      border-color: $emerald;
+      border-color: $zomp;
 
       &:after, &:before{
-        background-color: $emerald;
+        background-color: $zomp;
       }
     }
 

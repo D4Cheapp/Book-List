@@ -19,10 +19,10 @@ button.close{
   transition: .2s;
 
   &:hover{
-    border-color: $indianRed;
+    border-color: $oldRose;
 
     &:after, &:before{
-      background-color: $indianRed;
+      background-color: $oldRose;
     }
   }
 
