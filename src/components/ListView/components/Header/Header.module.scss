@@ -1,0 +1,33 @@
+header.header{
+  box-sizing: border-box;
+  padding-inline: calc(3vh + 1%);
+
+  h1.title{
+    margin: 0 0 2vh;
+    font-size: 5vh;
+  }
+
+  input.input{
+    box-sizing: border-box;
+    outline: none;
+
+    width: 100%;
+    height: 6vh;
+
+    background: $charcoal;
+    border: 3px $ghostWhite solid;
+
+    border-radius: 5px;
+
+    padding-inline: 2%;
+    padding-block: 1%;
+
+    color: $ghostWhite;
+    font-size: 3vh;
+
+    &::placeholder{
+      opacity: .5;
+      color: $ghostWhite;
+    }
+  }
+}

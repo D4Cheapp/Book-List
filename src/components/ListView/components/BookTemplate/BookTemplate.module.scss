@@ -1,0 +1,64 @@
+div.book{
+  width: 100%;
+  min-height: 8vh;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  div.titleContainer{
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    width: calc(100% - 18vh);
+    height: 100%;
+
+    box-sizing: border-box;
+    padding-inline: 2%;
+
+    border: 2px $ghostWhite solid;
+    border-radius: 5px;
+
+    cursor: default;
+    background-color: $charcoal;
+
+    p.title{
+      margin: 0;
+      font-size: 4vh;
+    }
+  }
+
+  button.button{
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    background-color: $charcoal;
+    background-repeat: no-repeat;
+
+    border: 2px $ghostWhite solid;
+    border-radius: 5px;
+
+    cursor: pointer;
+    background-size: 50%;
+
+    background-position-x: center;
+    background-position-y: center;
+
+    transition: .2s;
+  }
+
+  img.pencil, img.lens{
+    width: 60%;
+    transition: .2s;
+  }
+
+  button.edit:hover{
+    border-color: $saffron;
+  }
+
+  button.view:hover{
+    border-color: $aero;
+  }
+}
