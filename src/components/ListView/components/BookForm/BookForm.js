@@ -2,6 +2,8 @@ import React, {useRef, useState} from 'react';
 import style from './BookForm.module.scss';
 import InputMask from "react-input-mask";
 import {useDispatch} from "react-redux";
+import {CloseButton} from "./CloseButton";
+import clsx from "clsx";
 
 function BookForm({formState, setFormState}) {
     const [inputValue, setInputValue] = useState();
@@ -33,29 +35,32 @@ function BookForm({formState, setFormState}) {
         const dateFrom = dateFromRef.current?.value;
         const dateTo = dateToRef.current?.value;
 
-        if (title.trim() &&
-            !(dateFrom + dateTo).split('').includes('_')) {
+        if (!title.trim){
+            alert('Пожалуйста введите название книги');
+            return false
+        }
 
-            const newBookInfo = {
-                title: title.replace(/\s+/gm,' ').trim(),
-                description: description.replace(/\s+/gm,' ').trim(),
-                dateFrom: dateFrom,
-                dateTo: dateTo,
-            };
+        if ((dateFrom + dateTo).split('').includes('_')){
+            alert('Дата введена неверно. Введите дату в формате ДД-ММ-ГГГГ');
+            return false
+        }
 
-            if (type === 'edit'){
-                newBookInfo.id = bookInfo.id;
-            }
-            else {
-                newBookInfo.id = Date.now();
-            }
+        const newBookInfo = {
+            title: title.replace(/\s+/gm,' ').trim(),
+            description: description.replace(/\s+/gm,' ').trim(),
+            dateFrom: dateFrom,
+            dateTo: dateTo,
+        };
 
-            dispatch({type: type.toUpperCase(), bookInfo: newBookInfo});
-            setFormState(['hide', null]);
+        if (type === 'edit'){
+            newBookInfo.id = bookInfo.id;
         }
         else {
-            alert('Пожалуйста правильно введите данные')
+            newBookInfo.id = Date.now();
         }
+
+        dispatch({type: type.toUpperCase(), bookInfo: newBookInfo});
+        setFormState(['hide', null]);
     }
 
     return (
@@ -71,33 +76,33 @@ function BookForm({formState, setFormState}) {
                            defaultValue={bookInfo ? bookInfo.title : ''} readOnly={formReadonly}/>
                 </label>
 
-                <label className={style.label}>
-                    Описание
-
-                    <input className={style.input} type="text" ref={descriptionRef}
-                           defaultValue={bookInfo ? bookInfo.description : ''} readOnly={formReadonly}/>
-                </label>
-
                 <div className={style.date}>
                     <label className={style.label}>
                         Дата начала чтения
 
                         <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
-                           ref={dateFromRef} onChange={onInputChange} value={inputValue}
-                                defaultValue={bookInfo ? bookInfo.dateFrom : ''} readOnly={formReadonly}/>
+                                   ref={dateFromRef} onChange={onInputChange} value={inputValue}
+                                   defaultValue={bookInfo ? bookInfo.dateFrom : ''} readOnly={formReadonly}/>
                     </label>
 
                     <label className={style.label}>
-                        Дата окончания чтения
+                        Дата прочтения
 
                         <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
-                           ref={dateToRef} onChange={onInputChange} value={inputValue}
-                                defaultValue={bookInfo ? bookInfo.dateTo : ''} readOnly={formReadonly}/>
+                                   ref={dateToRef} onChange={onInputChange} value={inputValue}
+                                   defaultValue={bookInfo ? bookInfo.dateTo : ''} readOnly={formReadonly}/>
                     </label>
                 </div>
 
+                <label className={clsx(style.label, style.description)}>
+                    Описание
+
+                    <textarea className={style.input} ref={descriptionRef}
+                           defaultValue={bookInfo ? bookInfo.description : ''} readOnly={formReadonly}/>
+                </label>
+
                 {type !== 'view' &&
-                    <>
+                    <div className={style.buttonContainer}>
                         <button type='button' className={style.add} onClick={formValidation}>
                             {type === 'add' ? 'Добавить' : 'Сохранить'}
                         </button>
@@ -107,10 +112,10 @@ function BookForm({formState, setFormState}) {
                                 Удалить
                             </button>
                         }
-                    </>
+                    </div>
                 }
 
-                <button type='button' className={style.close} onClick={() => setFormState(['hide', null])}/>
+                <CloseButton setFormState={setFormState}/>
             </form>
         }</>
     );

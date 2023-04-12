@@ -17,6 +17,7 @@ section.listContainer{
   padding-inline: 3%;
 }
 
+
 div.bookContainer{
   display: inline-flex;
   flex-direction: column;
@@ -31,6 +32,7 @@ div.bookContainer{
   padding-left: calc(3vh + 1%);
   padding-right: 1%;
 }
+
 
 div.buttonContainer{
   display: inline-flex;
@@ -92,11 +94,13 @@ div.buttonContainer{
   }
 }
 
+
 @media screen and (max-width: 800px){
   section.listContainer{
     width: 80%;
   }
 }
+
 
 @media screen and (max-width: 500px){
   section.listContainer{
