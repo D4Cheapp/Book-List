@@ -2,13 +2,16 @@ import React, {useState} from 'react';
 import style from './BookTemplate.module.scss';
 import clsx from "clsx";
 
-import Pencil from '../../../../images/edit-pencil.svg';
-import ActivePencil from '../../../../images/edit-pencil-active.svg';
+import Pencil from '../../../images/edit-pencil.svg';
+import ActivePencil from '../../../images/edit-pencil-active.svg';
 
-import Lens from '../../../../images/quick-view.svg';
-import ActiveLens from '../../../../images/quick-view-active.svg';
+import Lens from '../../../images/quick-view.svg';
+import ActiveLens from '../../../images/quick-view-active.svg';
+import {useNavigate} from "react-router-dom";
 
-function BookTemplate({bookInfo, setFormState}) {
+function BookTemplate({bookInfo}) {
+
+    const navigate = useNavigate();
 
     const [isViewHover, setViewHover] = useState(false);
     const [isEditHover, setEditHover] = useState(false);
@@ -21,12 +24,12 @@ function BookTemplate({bookInfo, setFormState}) {
 
             <button className={clsx(style.button, style.edit)}
                     style={{backgroundImage: `url(${isEditHover ? ActivePencil : Pencil })`}} onClick={() =>
-                        setFormState(['edit', bookInfo])} onMouseEnter={() => setEditHover(true)}
+                        navigate(`/form/edit/${bookInfo.id}`)} onMouseEnter={() => setEditHover(true)}
                             onMouseLeave={() => setEditHover(false)}/>
 
             <button className={clsx(style.button, style.view)}
                     style={{backgroundImage: `url(${isViewHover ? ActiveLens : Lens})`}} onClick={() =>
-                        setFormState(['view', bookInfo])} onMouseEnter={() => setViewHover(true)}
+                        navigate(`/form/view/${bookInfo.id}`)} onMouseEnter={() => setViewHover(true)}
                             onMouseLeave={() => setViewHover(false)}>
             </button>
         </div>
