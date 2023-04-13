@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
-import serverRequestsReducer from "../reducer/localStorageReducer";
+import jsonServerReducer from "../reducer/jsonServerReducer";
 
-const store = configureStore({reducer: serverRequestsReducer});
+const store = configureStore({reducer: jsonServerReducer});
 
 export default store;

@@ -6,7 +6,7 @@ function initialState(){
     return  JSON.parse(localStorage.getItem('bookList'));
 }
 
-function localStorageReducer(state = initialState(), action){
+function jsonServerReducer(state = initialState(), action){
     let newStorage = Array.from(state);
 
     switch (action.type){
@@ -41,4 +41,4 @@ function localStorageReducer(state = initialState(), action){
     return newStorage;
 }
 
-export default localStorageReducer;
+export default jsonServerReducer;
