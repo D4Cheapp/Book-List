@@ -1,3 +1,6 @@
-import {getBooks} from "./requests";
+import {asyncGetBooks} from "./requests";
+import {asyncDeleteBook} from "./requests";
+import {asyncAddBook} from "./requests";
+import {asyncEditBook} from "./requests";
 
-export {getBooks};
+export {asyncGetBooks,asyncEditBook, asyncAddBook, asyncDeleteBook};

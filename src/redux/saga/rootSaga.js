@@ -1,19 +1,8 @@
-import {takeEvery, put, call} from 'redux-saga/effects';
-import {asyncServerAdd} from "../actions";
-import {getBooks} from "../../api";
-
-function* workerSaga(){
-    const data = yield call(getBooks);
-    const json = yield call(() => new Promise(res => res(data.json())));
-    yield put(asyncServerAdd(json));
-}
-
-function* watcherSaga(){
-    yield takeEvery('UPDATE_BOOKS', workerSaga);
-}
+import {all} from 'redux-saga/effects';
+import {addBookWatcher, deleteBookWatcher, editBookWatcher, updateBooksWatcher} from "./watchers";
 
 function* rootSaga(){
-    yield watcherSaga();
+    yield all([updateBooksWatcher(), addBookWatcher(), deleteBookWatcher(), editBookWatcher()]);
 }
 
 export {rootSaga}
