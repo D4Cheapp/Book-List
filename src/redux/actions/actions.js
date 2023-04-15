@@ -7,8 +7,16 @@ function editBook(bookInfo) {
 }
 
 
-function deleteBookAction(bookInfo) {
-    return {type: 'DELETE', id: bookInfo}
+function deleteBookAction(bookId) {
+    return {type: 'DELETE', id: bookId}
 }
 
-export {addBook, editBook, deleteBookAction}
+function asyncServerAdd(books) {
+    return {type: 'ASYNC_SERVER_ADD', books: books}
+}
+
+function asyncUpdateBooks() {
+    return {type: 'UPDATE_BOOKS'}
+}
+
+export {addBook, editBook, deleteBookAction, asyncServerAdd, asyncUpdateBooks}

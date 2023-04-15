@@ -1,7 +1,7 @@
 import {applyMiddleware, createStore} from "@reduxjs/toolkit";
 import jsonServerReducer from "../reducer/jsonServerReducer";
 import createSagaMiddleware from 'redux-saga'
-import {serverRequests} from "../saga";
+import {rootSaga} from "../saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -10,6 +10,6 @@ const store = createStore(
     applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(serverRequests);
+sagaMiddleware.run(rootSaga);
 
 export default store;

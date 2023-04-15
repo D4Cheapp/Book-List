@@ -6,7 +6,7 @@
   "homepage": "https://d4cheapp.github.io/Book-List/",
   "scripts": {
     "start": "webpack-dev-server",
-    "serverStart": "json-server --watch db.json",
+    "serverStart": "json-server --watch db.json -p 3001",
     "deploy": "gh-pages -d docs",
     "predeploy": "webpack --mode=production --define-process-env-node-env=production"
   },

@@ -1,3 +1,3 @@
-import {serverRequests} from "./serverRequests";
+import {rootSaga} from "./rootSaga";
 
-export {serverRequests}
+export {rootSaga}

@@ -2,7 +2,7 @@ import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-import {addBook, deleteBookAction, editBook} from "../../../../redux/actions";
+import {addBook, asyncUpdateBooks, deleteBookAction, editBook} from "../../../../redux/actions";
 
 function FormButtons({refs, bookInfo}) {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ function FormButtons({refs, bookInfo}) {
 
     function deleteBook() {
         dispatch(deleteBookAction(+bookId));
+        dispatch(asyncUpdateBooks());
         navigate('/');
     }
 
@@ -42,6 +43,7 @@ function FormButtons({refs, bookInfo}) {
         newBookInfo.id = type === 'edit' ? bookInfo.id : Date.now();
 
         dispatch( type ? editBook(newBookInfo) : addBook(newBookInfo));
+        dispatch(asyncUpdateBooks());
         navigate('/');
     }
 
