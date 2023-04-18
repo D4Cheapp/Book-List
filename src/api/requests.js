@@ -31,4 +31,10 @@ async function asyncEditBook(bookInfo){
     }).catch(error => console.error(error));
 }
 
-export {asyncGetBooks, asyncEditBook, asyncAddBook, asyncDeleteBook}
+async function asyncFilterBook(filter){
+    return await fetch(`http://localhost:3001/books${filter ? `?q=${filter}` : ''}`)
+        .then(data => data)
+            .catch(error => console.error(error));
+}
+
+export {asyncGetBooks, asyncEditBook, asyncAddBook, asyncDeleteBook, asyncFilterBook}

@@ -1,10 +1,10 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
 import {asyncDeleteBook} from "../../../api";
-import {asyncUpdateBooks} from "../../actions";
+import {updateBooks} from "../../actions";
 
 function* deleteBookWorker(action){
     yield call(asyncDeleteBook, action.id);
-    yield put(asyncUpdateBooks());
+    yield put(updateBooks());
 }
 
 function* deleteBookWatcher(){

@@ -11,12 +11,20 @@ function deleteBookAction(bookId) {
     return {type: 'DELETE', id: bookId}
 }
 
-function asyncServerAdd(books) {
-    return {type: 'ASYNC_SERVER_ADD', books: books}
+function asyncServerRequest(books) {
+    return {type: 'ASYNC_SERVER_REQUEST', books: books}
 }
 
-function asyncUpdateBooks() {
+function updateBooks() {
     return {type: 'UPDATE_BOOKS'}
 }
 
-export {addBook, editBook, deleteBookAction, asyncServerAdd, asyncUpdateBooks}
+function asyncBookFilter(filteredBooks) {
+    return {type: 'ASYNC_FILTER_BOOK', filteredBooks: filteredBooks}
+}
+
+function filterUpdate(filter) {
+    return {type: 'FILTER_UPDATE', filter: filter}
+}
+
+export {addBook, editBook, deleteBookAction, asyncServerRequest, updateBooks, asyncBookFilter, filterUpdate}

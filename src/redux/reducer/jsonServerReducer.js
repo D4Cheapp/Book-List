@@ -1,8 +1,12 @@
 function jsonServerReducer(state = undefined, action){
 
     switch (action.type){
-        case 'ASYNC_SERVER_ADD':{
+        case 'ASYNC_SERVER_REQUEST':{
             return action.books;
+        }
+
+        case 'ASYNC_FILTER_BOOK':{
+            return action.filteredBooks;
         }
     }
 }
