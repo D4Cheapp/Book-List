@@ -9,7 +9,7 @@ import Lens from '../../../images/quick-view.svg';
 import ActiveLens from '../../../images/quick-view-active.svg';
 import {useNavigate} from "react-router-dom";
 
-function BookTemplate({bookInfo}) {
+function BookTemplate({bookInfo, loading}) {
 
     const navigate = useNavigate();
 
@@ -18,20 +18,32 @@ function BookTemplate({bookInfo}) {
 
     return (
         <div className={style.book}>
-            <div className={style.titleContainer}>
-                <p className={style.title}>{bookInfo.title}</p>
-            </div>
+            {loading ?
+            <>
+                <div className={clsx(style.titleContainer, style.titleLoading)}/>
 
-            <button className={clsx(style.button, style.edit)}
-                style={{backgroundImage: `url(${isEditHover ? ActivePencil : Pencil })`}} onClick={() =>
+                <button className={clsx(style.button, style.buttonLoading)}/>
+                <button className={clsx(style.button, style.buttonLoading)}/>
+            </>
+            :
+            <>
+                <div className={style.titleContainer}>
+                    <p className={style.title}>{bookInfo.title}</p>
+                </div>
+
+                <button className={clsx(style.button, style.edit)}
+                        style={{backgroundImage: `url(${isEditHover ? ActivePencil : Pencil })`}} onClick={() =>
                     navigate({pathname: `/book/${bookInfo.id}/`, search: `type=edit`,})}
                         onMouseEnter={() => setEditHover(true)} onMouseLeave={() => setEditHover(false)}/>
 
-            <button className={clsx(style.button, style.view)}
-                style={{backgroundImage: `url(${isViewHover ? ActiveLens : Lens})`}} onClick={() =>
+                <button className={clsx(style.button, style.view)}
+                        style={{backgroundImage: `url(${isViewHover ? ActiveLens : Lens})`}} onClick={() =>
                     navigate(`/book/${bookInfo.id}`)} onMouseEnter={() => setViewHover(true)}
                         onMouseLeave={() => setViewHover(false)}>
-            </button>
+                </button>
+            </>
+            }
+
         </div>
     );
 }

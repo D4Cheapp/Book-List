@@ -1,24 +1,38 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './ListView.module.scss';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Header} from "./Header";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {BookTemplate} from "./BookTemplate";
+import {updateBooks} from "../../redux/actions";
+import clsx from "clsx";
 
 function ListView() {
     const state = useSelector(state => state);
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const filter = useSearchParams()[0].get('search');
+
+    useEffect(() => {
+        dispatch(updateBooks())
+    }, []);
 
     return (
         <section className={style.listContainer}>
             <Header/>
 
-            <div className={style.bookContainer}>
-                {state.map(book => { return book.title.includes(filter) || !filter ?
-                    <BookTemplate key={book.id} bookInfo={book}/> : ''})}
+            <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !state})}>
+                {state ?
+                    <>
+                        {state.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
+                    </>
+                    :
+                    <>
+                        {[...Array(7)].map((book, index) => <BookTemplate key={index} loading={true}/>)}
+                    </>
+                }
             </div>
+
 
             <div className={style.buttonContainer}>
                 <button className={style.addButton} onClick={() => navigate({

@@ -1,6 +1,15 @@
 import {configureStore} from "@reduxjs/toolkit";
-import serverRequestsReducer from "../reducer/localStorageReducer";
+import jsonServerReducer from "../reducer/jsonServerReducer";
+import createSagaMiddleware from 'redux-saga'
+import {rootSaga} from "../saga";
 
-const store = configureStore({reducer: serverRequestsReducer});
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore({
+    reducer: jsonServerReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
+});
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
