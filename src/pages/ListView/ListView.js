@@ -5,6 +5,7 @@ import {Header} from "./Header";
 import {useNavigate} from "react-router-dom";
 import {BookTemplate} from "./BookTemplate";
 import {updateBooks} from "../../redux/actions";
+import clsx from "clsx";
 
 function ListView() {
     const state = useSelector(state => state);
@@ -20,15 +21,17 @@ function ListView() {
         <section className={style.listContainer}>
             <Header/>
 
-            {state ?
-                <div className={style.bookContainer}>
-                    {state.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
-                </div>
-                :
-                <div>
-                    Loading...
-                </div>
-            }
+            <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !state})}>
+                {state ?
+                    <>
+                        {state.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
+                    </>
+                    :
+                    <>
+                        {[...Array(7)].map((book, index) => <BookTemplate key={index} loading={true}/>)}
+                    </>
+                }
+            </div>
 
 
             <div className={style.buttonContainer}>

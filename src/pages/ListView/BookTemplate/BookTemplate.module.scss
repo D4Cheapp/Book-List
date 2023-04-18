@@ -23,6 +23,7 @@ div.book{
 
     cursor: default;
     background-color: $charcoal;
+    transition: border .2s;
 
     p.title{
       margin: 0;
@@ -47,7 +48,7 @@ div.book{
     background-position-x: center;
     background-position-y: center;
 
-    transition: .2s;
+    transition: border .2s;
   }
 
   img.pencil, img.lens{
@@ -61,5 +62,27 @@ div.book{
 
   button.view:hover{
     border-color: $skyBlue;
+  }
+
+  button.buttonLoading{
+    cursor: default;
+  }
+
+  div.titleLoading, button.buttonLoading{
+    background: linear-gradient(-45deg, $charcoal, $ghostWhite) left;
+    background-size: 400%;
+    animation: fade 3s ease infinite;
+  }
+}
+
+@keyframes fade {
+  0%{
+    background-position: 99%;
+  }
+  50%{
+    background-position: 30%;
+  }
+  100%{
+    background-position: 99%;
   }
 }

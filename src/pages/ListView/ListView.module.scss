@@ -37,6 +37,12 @@ div.bookContainer{
 }
 
 
+div.bookContainerLoading{
+  overflow-y: hidden;
+  padding-inline: calc(3vh + 1%);
+}
+
+
 div.buttonContainer{
   display: inline-flex;
   justify-content: right;
