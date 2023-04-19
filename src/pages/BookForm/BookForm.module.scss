@@ -24,6 +24,17 @@ form.form {
 }
 
 
+div.inputContainer{
+  width: 80%;
+  gap: 10%;
+
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+
+
 label.label{
   display: inline-flex;
   flex-direction: column;
@@ -52,8 +63,21 @@ label.description{
 }
 
 
+@media screen and (max-width: 1000px){
+  div.inputContainer{
+    width: 80%;
+    gap: 2%;
+  }
+}
+
+
 @media screen and (max-width: 650px){
   label.label{
     font-size: 2vh;
+  }
+
+  div.inputContainer{
+    width: 80%;
+    gap: 2%;
   }
 }
