@@ -1,16 +1,18 @@
 import React, {useEffect, useRef} from 'react';
 import style from './BookForm.module.scss';
-import {useSelector} from "react-redux";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-import {CloseButton, DateContainer, FormButtons} from "./components";
 import clsx from "clsx";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams, useSearchParams} from "react-router-dom";
+import {CloseButton, DateContainer, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
+import {getBookById} from "../../redux/actions";
 
 function BookForm() {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const bookId = useParams().bookId;
     const type = useSearchParams()[0].get('type');
+    let bookInfo = useSelector(state => state)?.at(0);
 
     const titleRef = useRef();
     const authorRef = useRef();
@@ -18,15 +20,9 @@ function BookForm() {
     const dateFromRef = useRef();
     const dateToRef = useRef();
 
-    const books = useSelector(state => state);
-    let bookInfo = books?.filter(book => book.id === +bookId)[0];
-
     useEffect(() => {
-        const isBookInfoExist = !bookInfo && type !== 'add';
-        const isTypeExist = !!type?.trim() && !['edit', 'add'].includes(type);
-
-        if (isBookInfoExist || isTypeExist){
-            navigate('/404');
+        if (!bookInfo){
+            dispatch(getBookById(bookId));
         }
     }, []);
 

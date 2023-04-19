@@ -1,11 +1,11 @@
 import {put, takeEvery, call} from 'redux-saga/effects';
 import {asyncFilterBook} from "../../../api";
-import {asyncBookFilter} from "../../actions";
+import {bookFilter} from "../../actions";
 
 function* filterWorker(event){
     const data = yield call(asyncFilterBook, event.filter);
     const json = yield call(() => new Promise(res => res(data.json())));
-    yield put(asyncBookFilter(json));
+    yield put(bookFilter(json));
 }
 
 function* filterWatcher(){

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './DateContainer.module.scss';
 import InputMask from "react-input-mask";
 import {useSearchParams} from "react-router-dom";
@@ -6,11 +6,22 @@ import {useSearchParams} from "react-router-dom";
 function DateContainer({refs, bookInfo, parentStyle}) {
     const type = useSearchParams()[0].get('type');
 
-    const [inputValue, setInputValue] = useState();
+    const [dateFromValue, setDateFromValue] = useState('');
+    const [dateToValue, setDateToValue] = useState('');
 
-    function onInputChange(event) {
-        setInputValue(event.value)
+    function onDateFromChange(event) {
+        setDateFromValue(event.value)
     }
+
+    function onDateToChange(event) {
+        setDateToValue(event.value)
+    }
+
+
+    useEffect(() => {
+        setDateFromValue(bookInfo?.dateFrom);
+        setDateToValue(bookInfo?.dateTo);
+    },[bookInfo]);
 
     return (
         <div className={parentStyle.inputContainer}>
@@ -18,16 +29,15 @@ function DateContainer({refs, bookInfo, parentStyle}) {
                 Дата начала чтения
 
                 <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
-                       ref={refs.dateFromRef} onChange={onInputChange} value={inputValue}
-                           defaultValue={bookInfo ? bookInfo.dateFrom : ''} readOnly={!type}/>
+                       ref={refs.dateFromRef} onChange={onDateFromChange}
+                           value={dateFromValue || ''} readOnly={!type}/>
             </label>
 
             <label className={style.label}>
                 Дата прочтения
 
                 <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
-                       ref={refs.dateToRef} onChange={onInputChange} value={inputValue}
-                           defaultValue={bookInfo ? bookInfo.dateTo : ''} readOnly={!type}/>
+                       ref={refs.dateToRef} onChange={onDateToChange} value={dateToValue || ''} readOnly={!type}/>
             </label>
         </div>
     );
