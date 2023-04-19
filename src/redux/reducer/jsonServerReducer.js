@@ -5,8 +5,16 @@ function jsonServerReducer(state = undefined, action){
             return action.books;
         }
 
-        case 'ASYNC_FILTER_BOOK':{
+        case 'ASYNC_FILTER_BOOKS':{
             return action.filteredBooks;
+        }
+
+        case 'ASYNC_GET_BOOK':{
+            return action.book;
+        }
+        
+        default:{
+            return state
         }
     }
 }

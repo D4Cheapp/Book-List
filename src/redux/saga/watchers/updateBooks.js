@@ -1,11 +1,11 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
 import {asyncGetBooks} from "../../../api";
-import {asyncServerRequest} from "../../actions";
+import {serverRequest} from "../../actions";
 
 function* updateBooksWorker(){
     const data = yield call(asyncGetBooks);
     const json = yield call(() => new Promise(res => res(data.json())));
-    yield put(asyncServerRequest(json));
+    yield put(serverRequest(json));
 }
 
 function* updateBooksWatcher(){
