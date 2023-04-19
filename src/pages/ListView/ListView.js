@@ -22,7 +22,7 @@ function ListView() {
             <Header/>
 
             <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !state})}>
-                {state ?
+                {state?.at(0) ?
                     <>
                         {state.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
                     </>

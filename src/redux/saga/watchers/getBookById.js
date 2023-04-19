@@ -4,7 +4,7 @@ import {bookIdRequest} from "../../actions";
 
 function* getBookByIdWatcherWorker(action){
     const data = yield call(asyncGetBookById, action.bookId);
-    const json = yield call(() => new Promise(res => res(data.json())));
+    const json = yield call(() => new Promise(res => res(data?.json())));
     yield put(bookIdRequest([json]));
 }
 
