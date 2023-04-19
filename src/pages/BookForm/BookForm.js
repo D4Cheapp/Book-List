@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {CloseButton, DateContainer, FormButtons} from "./components";
 import clsx from "clsx";
+import {TitleContainer} from "./components/TitleContainer";
 
 function BookForm() {
     const navigate = useNavigate();
@@ -12,12 +13,13 @@ function BookForm() {
     const type = useSearchParams()[0].get('type');
 
     const titleRef = useRef();
+    const authorRef = useRef();
     const descriptionRef = useRef();
     const dateFromRef = useRef();
     const dateToRef = useRef();
 
     const books = useSelector(state => state);
-    let bookInfo = books.filter(book => book.id === +bookId)[0];
+    let bookInfo = books?.filter(book => book.id === +bookId)[0];
 
     useEffect(() => {
         const isBookInfoExist = !bookInfo && type !== 'add';
@@ -31,14 +33,11 @@ function BookForm() {
     return (
         <form className={style.form} onSubmit={(event) => event.preventDefault()}>
 
-            <label className={style.label}>
-                Название книги
+            <TitleContainer refs={{titleRef: titleRef, authorRef: authorRef}}
+                    bookInfo={bookInfo} parentStyle={style}/>
 
-                <input className={style.input} type="text" ref={titleRef}
-                       defaultValue={bookInfo ? bookInfo.title : ''} readOnly={!type}/>
-            </label>
-
-            <DateContainer refs={{dateToRef: dateToRef, dateFromRef: dateFromRef}} bookInfo={bookInfo}/>
+            <DateContainer refs={{dateToRef: dateToRef, dateFromRef: dateFromRef}}
+                   bookInfo={bookInfo} parentStyle={style}/>
 
             <label className={clsx(style.label, style.description)}>
                 Описание

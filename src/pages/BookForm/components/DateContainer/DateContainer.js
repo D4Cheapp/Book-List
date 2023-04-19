@@ -3,7 +3,7 @@ import style from './DateContainer.module.scss';
 import InputMask from "react-input-mask";
 import {useSearchParams} from "react-router-dom";
 
-function DateContainer({refs, bookInfo}) {
+function DateContainer({refs, bookInfo, parentStyle}) {
     const type = useSearchParams()[0].get('type');
 
     const [inputValue, setInputValue] = useState();
@@ -13,7 +13,7 @@ function DateContainer({refs, bookInfo}) {
     }
 
     return (
-        <div className={style.date}>
+        <div className={parentStyle.inputContainer}>
             <label className={style.label}>
                 Дата начала чтения
 
