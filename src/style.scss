@@ -23,12 +23,21 @@ body{
   ::-webkit-scrollbar{
     width: 3vh;
     background: transparent;
+
+    @media screen and (max-width: 800px){
+      width: 3vh;
+    }
   }
 
   ::-webkit-scrollbar-thumb{
     background: $ghostWhite;
     border: 1vh $gunmetal solid;
     border-radius: 1vw;
+
+    @media screen and (max-width: 800px){
+      border: none;
+      border-radius: 1vw;
+    }
   }
 }
 
@@ -40,6 +49,7 @@ body{
   align-items: center;
   justify-content: center;
 }
+
 
 @mixin inputTemplate(){
   outline: none;
@@ -58,6 +68,10 @@ body{
     color: $ghostWhite;
     opacity: .5;
   }
+
+  @media screen and (max-width: 600px){
+    font-size: 3vw;
+  }
 }
 
 
@@ -73,22 +87,8 @@ body{
       width: 50%;
   }
 
-  @media screen and (max-width: 650px){
-      font-size: 2vh;
+  @media screen and (max-width: 600px){
+      font-size: 3.2vw;
       width: 48%;
-  }
-}
-
-
-@media screen and (max-width: 800px){
-  body{
-    ::-webkit-scrollbar{
-      width: 3vh;
-    }
-  }
-
-  ::-webkit-scrollbar-thumb{
-    border: none;
-    border-radius: 1vw;
   }
 }

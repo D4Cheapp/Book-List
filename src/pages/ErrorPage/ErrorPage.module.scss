@@ -1,6 +1,13 @@
 p.title{
   font-size: 5vw;
+  text-align: center;
+
+  @media screen and (max-width: 1000px){
+    font-size: 5vh;
+    text-align: center;
+  }
 }
+
 
 button.button{
   width: 100%;
