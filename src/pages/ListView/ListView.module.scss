@@ -15,6 +15,14 @@ section.listContainer{
 
   padding-block: 3%;
   padding-inline: 3%;
+
+  @media screen and (max-width: 800px){
+    width: 80%;
+  }
+
+  @media screen and (max-width: 500px){
+    width: 90%;
+  }
 }
 
 
@@ -100,19 +108,5 @@ div.buttonContainer{
       background-color: $ghostWhite;
       transition: .2s;
     }
-  }
-}
-
-
-@media screen and (max-width: 800px){
-  section.listContainer{
-    width: 80%;
-  }
-}
-
-
-@media screen and (max-width: 500px){
-  section.listContainer{
-    width: 90%;
   }
 }
