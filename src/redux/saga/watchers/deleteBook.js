@@ -4,6 +4,7 @@ import {DELETE_TYPE} from "../actions";
 
 function* deleteBookWorker(action){
     yield call(asyncDeleteBook, action.id);
+    yield call(() => window.location.href = '/')
 }
 
 function* deleteBookWatcher(){

@@ -25,7 +25,9 @@ function BookForm() {
     const dateToRef = useRef();
 
     useEffect(() => {
-        dispatch(getBookById(bookId));
+        if (type !== 'add'){
+            dispatch(getBookById(bookId));
+        }
     },[]);
 
     return (
