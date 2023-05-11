@@ -1,22 +1,22 @@
-function jsonServerReducer(state = undefined, action){
+import {createSlice} from "@reduxjs/toolkit";
 
-    switch (action.type){
-        case 'ASYNC_SERVER_REQUEST':{
-            return action.books;
-        }
+const jsonBookServerSlice = createSlice({
+   name: 'jsonBookServer',
+   initialState: undefined,
+   reducers: {
+        serverRequest(state, books) {
+            return books.payload;
+        },
 
-        case 'ASYNC_FILTER_BOOKS':{
-            return action.filteredBooks;
-        }
+        bookFilter(state, filteredBooks) {
+            return filteredBooks.payload;
+        },
 
-        case 'ASYNC_GET_BOOK':{
-            return action.book;
+        bookIdRequest(state, book) {
+            return book.payload
         }
-        
-        default:{
-            return state
-        }
-    }
-}
+   }
+});
 
-export default jsonServerReducer;
+export const {serverRequest, bookFilter, bookIdRequest} = jsonBookServerSlice.actions;
+export default jsonBookServerSlice.reducer;

@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
-import jsonServerReducer from "../reducer/jsonServerReducer";
+import {jsonServerReducer} from "../reducer";
 import createSagaMiddleware from 'redux-saga'
 import {rootSaga} from "../saga";
 

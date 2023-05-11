@@ -2,7 +2,7 @@ import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-import {addBook, deleteBookAction, editBook} from "../../../../redux/actions";
+import {addBook, deleteBookAction, editBook} from "../../../../redux/saga/actions";
 
 function FormButtons({refs, bookInfo}) {
     const dispatch = useDispatch();
@@ -35,8 +35,8 @@ function FormButtons({refs, bookInfo}) {
         const newBookInfo = {
             title: title.replace(/\s+/gm,' ').trim(),
             description: description.replace(/\s+/gm,' ').trim(),
-            dateFrom: dateFrom,
-            dateTo: dateTo,
+            dateFrom,
+            dateTo,
         };
 
         newBookInfo.id = type === 'edit' ? bookInfo.id : Date.now();

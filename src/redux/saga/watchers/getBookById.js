@@ -1,6 +1,7 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncGetBookById} from "../../../api";
-import {bookIdRequest} from "../../actions";
+import {bookIdRequest} from "../../reducer/jsonServerReducer";
+import {GET_BOOK_BY_ID_TYPE} from "../actions";
 
 function* getBookByIdWatcherWorker(action){
     const data = yield call(asyncGetBookById, action.bookId);
@@ -9,7 +10,7 @@ function* getBookByIdWatcherWorker(action){
 }
 
 function* getBookByIdWatcher(){
-    yield takeEvery('GET_BOOK', getBookByIdWatcherWorker);
+    yield takeEvery(GET_BOOK_BY_ID_TYPE, getBookByIdWatcherWorker);
 }
 
 export {getBookByIdWatcher}
