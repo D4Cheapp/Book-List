@@ -1,7 +1,7 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
 import {asyncGetBooks} from "../../../api";
 import {serverRequest} from "../../reducer/jsonServerReducer";
-import {updateBooks} from "../actions";
+import {UPDATE_BOOKS_TYPE} from "../actions";
 
 function* updateBooksWorker(){
     const data = yield call(asyncGetBooks);
@@ -10,7 +10,7 @@ function* updateBooksWorker(){
 }
 
 function* updateBooksWatcher(){
-    yield takeEvery(updateBooks().type, updateBooksWorker);
+    yield takeEvery(UPDATE_BOOKS_TYPE, updateBooksWorker);
 }
 
 export {updateBooksWatcher}

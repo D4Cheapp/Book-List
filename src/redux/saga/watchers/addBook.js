@@ -1,13 +1,13 @@
 import {takeEvery, call} from 'redux-saga/effects';
 import {asyncAddBook} from "../../../api";
-import {addBook} from "../actions";
+import {ADD_TYPE} from "../actions";
 
 function* addBookWorker(action){
     yield call(asyncAddBook, action.bookInfo);
 }
 
 function* addBookWatcher(){
-    yield takeEvery(addBook().type, addBookWorker);
+    yield takeEvery(ADD_TYPE, addBookWorker);
 }
 
 export {addBookWatcher}
