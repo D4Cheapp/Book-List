@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {Header} from "./Header";
 import {useNavigate} from "react-router-dom";
 import {BookTemplate} from "./BookTemplate";
-import {updateBooks} from "../../redux/actions";
 import clsx from "clsx";
+import {updateBooks} from "../../redux/saga/actions";
 
 function ListView() {
     const state = useSelector(state => state);
@@ -14,7 +14,7 @@ function ListView() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(updateBooks())
+        dispatch(updateBooks());
     }, []);
 
     return (

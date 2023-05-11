@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {CloseButton, DateContainer, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
-import {getBookById} from "../../redux/actions";
+import {getBookById} from "../../redux/saga/actions";
 
 function BookForm() {
     const dispatch = useDispatch();
