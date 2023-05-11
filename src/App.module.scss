@@ -1,0 +1,26 @@
+section.listContainer{
+  position: relative;
+
+  width: 60%;
+  height: 70%;
+
+  max-height: 70%;
+  overflow: hidden;
+
+  display: inline-flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  gap: 4vh;
+
+  padding-block: 3%;
+  padding-inline: 3%;
+
+  @media screen and (max-width: 800px){
+    width: 80%;
+  }
+
+  @media screen and (max-width: 500px){
+    width: 90%;
+  }
+}

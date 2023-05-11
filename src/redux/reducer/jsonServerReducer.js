@@ -1,22 +1,26 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+//Редьюсер запросов на сервер
 const jsonBookServerSlice = createSlice({
    name: 'jsonBookServer',
    initialState: undefined,
    reducers: {
-        serverRequest(state, books) {
+        //Запрос всех книг с сервера
+        allBooksRequest(state, books) {
             return books.payload;
         },
 
-        bookFilter(state, filteredBooks) {
+        //Запрос книг по фильтру
+        bookFilterRequest(state, filteredBooks) {
             return filteredBooks.payload;
         },
 
-        bookIdRequest(state, book) {
+        //Запрос книги по id
+        bookByIdRequest(state, book) {
             return book.payload
         }
    }
 });
 
-export const {serverRequest, bookFilter, bookIdRequest} = jsonBookServerSlice.actions;
+export const {allBooksRequest, bookFilterRequest, bookByIdRequest} = jsonBookServerSlice.actions;
 export default jsonBookServerSlice.reducer;

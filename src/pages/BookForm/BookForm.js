@@ -5,16 +5,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
 import {CloseButton, DateContainer, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
-import {getBookById} from "../../redux/saga/actions";
+import {getBookById} from "../../redux/actions";
 
 //Форма для добавления / редактирования / просмотра книг
 function BookForm() {
     const dispatch = useDispatch();
-
-    let bookInfo = useSelector(state => state);
-    if (bookInfo?.length === 1){
-        bookInfo = bookInfo[0];
-    }
+    const bookInfo = useSelector(state => state);
 
     const bookId = useParams().bookId;
     const type = useSearchParams()[0].get('type');

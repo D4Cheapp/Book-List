@@ -2,8 +2,9 @@ import React, {useEffect, useRef} from 'react';
 import style from './Header.module.scss';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {filterUpdate, updateBooks} from "../../../../redux/saga/actions";
+import {filterUpdate, updateBooks} from "../../redux/actions";
 
+//Заголовок со строкой фильтрации
 function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function Header() {
     const inputRef = useRef();
     const searchParams = useSearchParams()[0].get('search');
 
+    //Фильтрация по параметрам запроса
     function searchParamsFilter() {
         if (searchParams === ''){
             navigate('/');
@@ -23,10 +25,12 @@ function Header() {
         }
     }
 
+    //Перемещение на ссылку с параметром текущей фильтрации
     function filterNavigate(event) {
         navigate({pathname: `/`, search: `?search=${event.target.value}`});
     }
 
+    //После задержки в 0.5 секунд происходит фильтрация
     useEffect(() => {
         const filterDelay = setTimeout(searchParamsFilter, 500);
         return () => clearTimeout(filterDelay);
