@@ -2,19 +2,29 @@ import React, {useState} from 'react';
 import style from './BookTemplate.module.scss';
 import clsx from "clsx";
 
-import Pencil from '../../../../images/edit-pencil.svg';
-import ActivePencil from '../../../../images/edit-pencil-active.svg';
+import Pencil from '../../../images/edit-pencil.svg';
+import ActivePencil from '../../../images/edit-pencil-active.svg';
 
-import Lens from '../../../../images/quick-view.svg';
-import ActiveLens from '../../../../images/quick-view-active.svg';
+import Lens from '../../../images/quick-view.svg';
+import ActiveLens from '../../../images/quick-view-active.svg';
 import {useNavigate} from "react-router-dom";
 
+//Шаблон для книги в списке
 function BookTemplate({bookInfo, loading}) {
-
     const navigate = useNavigate();
 
     const [isViewHover, setViewHover] = useState(false);
     const [isEditHover, setEditHover] = useState(false);
+
+    //Перемещение на страницу редактирования книги
+    function navigateToEdit() {
+        navigate({pathname: `/book/${bookInfo.id}/`, search: `type=edit`})
+    }
+
+    //Перемещение на страницу просмотра книги
+    function navigateToView() {
+        navigate(`/book/${bookInfo.id}`)
+    }
 
     return (
         <div className={style.book}>
@@ -27,6 +37,7 @@ function BookTemplate({bookInfo, loading}) {
             </>
             :
             <>
+                {/*Название книги*/}
                 <div className={style.titleContainer}>
                     <p className={style.title}>{bookInfo.title}</p>
                 </div>
@@ -34,16 +45,14 @@ function BookTemplate({bookInfo, loading}) {
                 {/*Кнопка редактирования*/}
                 <button className={clsx(style.button, style.edit)}
                     style={{backgroundImage: `url(${isEditHover ? ActivePencil : Pencil })`}}
-                        onClick={() => navigate({pathname: `/book/${bookInfo.id}/`, search: `type=edit`,})}
-                            onMouseEnter={() => setEditHover(true)}
-                                onMouseLeave={() => setEditHover(false)}/>
+                        onClick={navigateToEdit} onMouseEnter={() => setEditHover(true)}
+                            onMouseLeave={() => setEditHover(false)}/>
 
                 {/*Кнопка быстрого просмотра*/}
                 <button className={clsx(style.button, style.view)}
                     style={{backgroundImage: `url(${isViewHover ? ActiveLens : Lens})`}}
-                        onClick={() => navigate(`/book/${bookInfo.id}`)}
-                            onMouseEnter={() => setViewHover(true)}
-                                onMouseLeave={() => setViewHover(false)}/>
+                        onClick={navigateToView} onMouseEnter={() => setViewHover(true)}
+                            onMouseLeave={() => setViewHover(false)}/>
             </>
             }
 

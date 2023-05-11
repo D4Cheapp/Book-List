@@ -6,7 +6,7 @@ function ErrorPage() {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div className={style.container}>
             <p className={style.title}>
                 Страница не найдена
             </p>

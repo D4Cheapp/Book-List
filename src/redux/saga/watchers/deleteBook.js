@@ -1,7 +1,8 @@
 import {takeEvery, call} from 'redux-saga/effects';
 import {asyncDeleteBook} from "../../../api";
-import {DELETE_TYPE} from "../actions";
+import {DELETE_TYPE} from "../../actions";
 
+//Запрос на удаление книги и переадресация на начальную страницу
 function* deleteBookWorker(action){
     yield call(asyncDeleteBook, action.id);
     yield call(() => window.location.href = '/')

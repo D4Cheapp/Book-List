@@ -1,0 +1,59 @@
+div.buttonContainer{
+  display: inline-flex;
+  justify-content: right;
+
+  box-sizing: border-box;
+  padding-inline: calc(3vh + 1%);
+
+  button.addButton{
+    position: relative;
+
+    width: 100%;
+    height: 6vh;
+
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    background: $charcoal;
+    border: 3px $ghostWhite solid;
+
+    cursor: pointer;
+    transition: .2s;
+
+    &:hover{
+      border-color: $zomp;
+
+      &:after, &:before{
+        background-color: $zomp;
+      }
+    }
+
+    &:after{
+      content: '';
+      position: absolute;
+
+      width: 2.5vh;
+      height: 3px;
+
+      background-color: $ghostWhite;
+      transition: .2s;
+    }
+
+    &:before{
+      content: '';
+      position: absolute;
+
+      width: 2.5vh;
+      height: 3px;
+
+      rotate: 90deg;
+      background-color: $ghostWhite;
+      transition: .2s;
+    }
+  }
+}

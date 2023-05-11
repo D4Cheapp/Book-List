@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from "react-redux";
 import {store} from "./redux/store";
 import {createHashRouter, RouterProvider} from "react-router-dom";
-import {BookForm, ErrorPage, BookList} from "./pages";
+import {BookForm, ErrorPage} from "./pages";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createHashRouter([
     {
         path: '/',
-        element: <BookList/>
+        element: <App/>
     },
     {
         path: '/book',

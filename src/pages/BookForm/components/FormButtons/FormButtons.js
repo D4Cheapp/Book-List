@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
-import {addBook, deleteBookAction, editBook} from "../../../../redux/saga/actions";
+import {addBook, deleteBookAction, editBook} from "../../../../redux/actions";
 
 //Кнопки для удаления, сохранения и добавления книг
 function FormButtons({refs, bookInfo, type, bookId}) {
@@ -47,7 +47,7 @@ function FormButtons({refs, bookInfo, type, bookId}) {
 
     return (
         <>
-            {!!type &&
+            {type &&
                 <div className={style.buttonContainer}>
                     <button type='button' className={style.add} onClick={formValidation}>
                         {type === 'add' ? 'Добавить' : 'Сохранить'}
