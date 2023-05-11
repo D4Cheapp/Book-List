@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {addBook, deleteBookAction, editBook} from "../../../../redux/saga/actions";
 
+//Кнопки для удаления, сохранения и добавления книг
 function FormButtons({refs, bookInfo}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();

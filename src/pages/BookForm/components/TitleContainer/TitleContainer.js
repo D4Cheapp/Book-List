@@ -2,6 +2,7 @@ import React from 'react';
 import style from './TitleContainer.module.scss';
 import {useSearchParams} from "react-router-dom";
 
+//Контейнер для названия и автора книги
 function TitleContainer({refs, bookInfo, parentStyle}) {
     const type = useSearchParams()[0].get('type');
 

@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import style from './Header.module.scss';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {filterUpdate, updateBooks} from "../../../redux/saga/actions";
+import {filterUpdate, updateBooks} from "../../../../redux/saga/actions";
 
 function Header() {
     const navigate = useNavigate();
