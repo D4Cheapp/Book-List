@@ -1,15 +1,11 @@
 import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
-import {useParams, useSearchParams} from "react-router-dom";
 import {addBook, deleteBookAction, editBook} from "../../../../redux/saga/actions";
 
 //Кнопки для удаления, сохранения и добавления книг
-function FormButtons({refs, bookInfo}) {
+function FormButtons({refs, bookInfo, type, bookId}) {
     const dispatch = useDispatch();
-
-    const type = useSearchParams()[0].get('type');
-    const bookId = useParams().bookId;
 
     //Удаление книги
     function deleteBook() {
@@ -20,6 +16,7 @@ function FormButtons({refs, bookInfo}) {
     function formValidation() {
         const title = refs.titleRef.current?.value;
         const description = refs.descriptionRef.current?.value;
+        const author = refs.authorRef.current?.value;
         const dateFrom = refs.dateFromRef.current?.value;
         const dateTo = refs.dateToRef.current?.value;
 
@@ -38,6 +35,7 @@ function FormButtons({refs, bookInfo}) {
         const isEditType = type === 'edit';
         const newBookInfo = {
             title: title.replace(/\s+/gm,' ').trim(),
+            author: author.replace(/\s+/gm,' ').trim(),
             description: description.replace(/\s+/gm,' ').trim(),
             dateFrom,
             dateTo,
