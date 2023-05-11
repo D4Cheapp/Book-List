@@ -3,6 +3,7 @@ import style from './DateContainer.module.scss';
 import InputMask from "react-input-mask";
 import {useSearchParams} from "react-router-dom";
 
+//Контейнер для дат начала и конца прочтения книги
 function DateContainer({refs, bookInfo, parentStyle}) {
     const type = useSearchParams()[0].get('type');
 
@@ -17,7 +18,7 @@ function DateContainer({refs, bookInfo, parentStyle}) {
         setDateToValue(event.value)
     }
 
-
+    //Изменение начальных значений дат
     useEffect(() => {
         setDateFromValue(bookInfo?.dateFrom);
         setDateToValue(bookInfo?.dateTo);

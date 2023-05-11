@@ -4,6 +4,7 @@ import {ADD_TYPE} from "../actions";
 
 function* addBookWorker(action){
     yield call(asyncAddBook, action.bookInfo);
+    yield call(() => window.location.href = '/')
 }
 
 function* addBookWatcher(){

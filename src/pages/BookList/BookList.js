@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
-import style from './ListView.module.scss';
+import style from './BookList.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {Header} from "./Header";
 import {useNavigate} from "react-router-dom";
-import {BookTemplate} from "./BookTemplate";
-import clsx from "clsx";
 import {updateBooks} from "../../redux/saga/actions";
+import {BookTemplate, Header} from "./components";
+import clsx from "clsx";
 
-function ListView() {
+function BookList() {
     const state = useSelector(state => state);
 
     const dispatch = useDispatch();
@@ -44,4 +43,4 @@ function ListView() {
     );
 }
 
-export default ListView;
+export default BookList;

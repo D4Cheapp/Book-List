@@ -1,48 +1,50 @@
 import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {addBook, deleteBookAction, editBook} from "../../../../redux/saga/actions";
 
+//Кнопки для удаления, сохранения и добавления книг
 function FormButtons({refs, bookInfo}) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const type = useSearchParams()[0].get('type');
     const bookId = useParams().bookId;
 
+    //Удаление книги
     function deleteBook() {
         dispatch(deleteBookAction(+bookId));
-        navigate('/');
     }
 
+    //Валидация при добавлении новой книги
     function formValidation() {
         const title = refs.titleRef.current?.value;
         const description = refs.descriptionRef.current?.value;
         const dateFrom = refs.dateFromRef.current?.value;
         const dateTo = refs.dateToRef.current?.value;
 
+        //Проверка правильности названия
         if (!title.trim()){
             alert('Пожалуйста введите название книги');
             return false
         }
 
+        //Проверка правильности дат
         if ((dateFrom + dateTo).split('').includes('_')){
             alert('Дата введена неверно. Введите дату в формате ДД-ММ-ГГГГ');
             return false
         }
 
+        const isEditType = type === 'edit';
         const newBookInfo = {
             title: title.replace(/\s+/gm,' ').trim(),
             description: description.replace(/\s+/gm,' ').trim(),
             dateFrom,
             dateTo,
+            id: isEditType ? bookInfo.id : Date.now(),
         };
 
-        newBookInfo.id = type === 'edit' ? bookInfo.id : Date.now();
-
-        dispatch( type === 'edit' ? editBook(newBookInfo) : addBook(newBookInfo));
-        navigate('/');
+        dispatch(isEditType ? editBook(newBookInfo) : addBook(newBookInfo));
     }
 
     return (

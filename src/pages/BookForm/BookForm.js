@@ -2,19 +2,21 @@ import React, {useEffect, useRef} from 'react';
 import style from './BookForm.module.scss';
 import clsx from "clsx";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {CloseButton, DateContainer, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
 import {getBookById} from "../../redux/saga/actions";
 
 function BookForm() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
+    let bookInfo = useSelector(state => state);
+    if (bookInfo?.length === 1){
+        bookInfo = bookInfo[0];
+    }
 
     const bookId = useParams().bookId;
     const type = useSearchParams()[0].get('type');
-
-    const bookInfo = useSelector(state => state)?.at(0);
 
     const titleRef = useRef();
     const authorRef = useRef();
@@ -23,16 +25,10 @@ function BookForm() {
     const dateToRef = useRef();
 
     useEffect(() => {
-        if (!bookInfo){
+        if (type !== 'add'){
             dispatch(getBookById(bookId));
         }
-    }, []);
-
-    useEffect(() => {
-        if (bookInfo){
-            dispatch(getBookById(bookId));
-        }
-    }, [navigate]);
+    },[]);
 
     return (
         <form className={style.form} onSubmit={(event) => event.preventDefault()}>

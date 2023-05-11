@@ -1,5 +1,5 @@
 import {BookForm} from "./BookForm";
 import {ErrorPage} from "./ErrorPage";
-import {ListView} from "./ListView";
+import {BookList} from "./BookList";
 
-export {BookForm, ErrorPage, ListView};
+export {BookForm, ErrorPage, BookList};

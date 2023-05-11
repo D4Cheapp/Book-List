@@ -4,6 +4,7 @@ import {EDIT_TYPE} from "../actions";
 
 function* editBookWorker(action){
     yield call(asyncEditBook, action.bookInfo);
+    yield call(() => window.location.href = '/')
 }
 
 function* editBookWatcher(){

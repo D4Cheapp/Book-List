@@ -35,8 +35,8 @@ body{
     border-radius: 1vw;
 
     @media screen and (max-width: 800px){
-      border: none;
-      border-radius: 1vw;
+      border-width: 7px;
+      border-radius: 2vw;
     }
   }
 }
