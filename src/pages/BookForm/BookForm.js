@@ -7,6 +7,7 @@ import {CloseButton, DateContainer, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
 import {getBookById} from "../../redux/saga/actions";
 
+//Форма для добавления / редактирования / просмотра книг
 function BookForm() {
     const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ function BookForm() {
     const dateFromRef = useRef();
     const dateToRef = useRef();
 
+    //Если книга не добавляется, то она запрашивается по id
     useEffect(() => {
         if (type !== 'add'){
             dispatch(getBookById(bookId));
@@ -33,11 +35,9 @@ function BookForm() {
     return (
         <form className={style.form} onSubmit={(event) => event.preventDefault()}>
 
-            <TitleContainer refs={{titleRef: titleRef, authorRef: authorRef}}
-                    bookInfo={bookInfo} parentStyle={style}/>
+            <TitleContainer refs={{titleRef, authorRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
 
-            <DateContainer refs={{dateToRef: dateToRef, dateFromRef: dateFromRef}}
-                   bookInfo={bookInfo} parentStyle={style}/>
+            <DateContainer refs={{dateToRef, dateFromRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
 
             <label className={clsx(style.label, style.description)}>
                 Описание
@@ -46,12 +46,8 @@ function BookForm() {
                        defaultValue={bookInfo ? bookInfo.description : ''} readOnly={!type}/>
             </label>
 
-            <FormButtons bookInfo={bookInfo} refs={{
-                dateToRef: dateToRef,
-                dateFromRef: dateFromRef,
-                titleRef: titleRef,
-                descriptionRef: descriptionRef,
-            }}/>
+            <FormButtons bookInfo={bookInfo} type={type} bookId={bookId}
+                     refs={{dateToRef, dateFromRef, titleRef, authorRef, descriptionRef}} />
 
             <CloseButton/>
         </form>
