@@ -8,14 +8,14 @@ function TitleContainer({refs, bookInfo, parentStyle, type}) {
             <label className={style.label}>
                 Название книги
 
-                <input className={style.input} type="text" ref={refs.titleRef}
+                <input className={style.input} type="text" ref={refs.titleRef} disabled={!type}
                        defaultValue={bookInfo ? bookInfo.title : ''} readOnly={!type}/>
             </label>
 
             <label className={style.label}>
                 Автор книги
 
-                <input className={style.input} type="text" ref={refs.authorRef}
+                <input className={style.input} type="text" ref={refs.authorRef} disabled={!type}
                        defaultValue={bookInfo ? bookInfo.author : ''} readOnly={!type}/>
             </label>
         </div>
