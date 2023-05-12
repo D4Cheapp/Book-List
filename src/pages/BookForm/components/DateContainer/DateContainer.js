@@ -18,8 +18,10 @@ function DateContainer({refs, bookInfo, parentStyle, type}) {
 
     //Изменение начальных значений дат
     useEffect(() => {
-        setDateFromValue(bookInfo?.dateFrom);
-        setDateToValue(bookInfo?.dateTo);
+        if (bookInfo?.dateFrom && bookInfo?.dateTo){
+            setDateFromValue(bookInfo?.dateFrom);
+            setDateToValue(bookInfo?.dateTo);
+        }
     },[bookInfo]);
 
     return (
