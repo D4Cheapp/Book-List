@@ -27,16 +27,15 @@ function DateContainer({refs, bookInfo, parentStyle, type}) {
             <label className={style.label}>
                 Дата начала чтения
 
-                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
-                       ref={refs.dateFromRef} onChange={onDateFromChange}
-                           value={dateFromValue || ''} readOnly={!type}/>
+                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={!type}
+                       ref={refs.dateFromRef} onChange={onDateFromChange} value={dateFromValue} readOnly={!type}/>
             </label>
 
             <label className={style.label}>
                 Дата прочтения
 
-                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ'
-                       ref={refs.dateToRef} onChange={onDateToChange} value={dateToValue || ''} readOnly={!type}/>
+                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={!type}
+                       ref={refs.dateToRef} onChange={onDateToChange} value={dateToValue} readOnly={!type}/>
             </label>
         </div>
     );

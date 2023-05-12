@@ -38,7 +38,7 @@ function BookForm() {
             <label className={clsx(style.label, style.description)}>
                 Описание
 
-                <textarea className={style.input} ref={descriptionRef}
+                <textarea className={style.input} ref={descriptionRef} disabled={!type}
                        defaultValue={bookInfo ? bookInfo.description : ''} readOnly={!type}/>
             </label>
 
