@@ -29,10 +29,6 @@ div.book{
       margin: 0;
       font-size: 4vh;
       white-space: nowrap;
-
-      @media screen and (max-width: 500px){
-        font-size: 4vw;
-      }
     }
   }
 
