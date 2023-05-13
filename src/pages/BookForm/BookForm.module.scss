@@ -22,8 +22,13 @@ form.form {
   padding-block: 5vh;
   padding-inline: 2%;
 
+  @media screen and (max-width: 1000px){
+    padding-block: 2vh;
+  }
+
   @media screen and (max-width: 650px){
     width: 90%;
+    height: 80%;
   }
 }
 
@@ -36,14 +41,16 @@ div.inputContainer{
   align-items: flex-end;
   justify-content: space-between;
 
-  @media screen and (max-width: 1000px){
+  @media screen and (max-width: 1400px){
     width: 80%;
     gap: 2%;
   }
 
-  @media screen and (max-width: 650px){
-    width: 80%;
-    gap: 2%;
+  @media screen and (max-width: 1000px){
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1vh;
   }
 }
 
@@ -60,6 +67,10 @@ label.label{
   input.input {
     @include inputTemplate();
   }
+
+  @media screen and (max-width: 1400px){
+    width: 82%;
+  }
 }
 
 
@@ -72,5 +83,10 @@ label.description{
 
     resize: none;
     @include inputTemplate();
+  }
+
+  @media screen and (max-width: 1000px){
+    height: 30%;
+    width: 75%;
   }
 }

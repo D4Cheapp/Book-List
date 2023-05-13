@@ -49,4 +49,8 @@ button.close{
     background-color: $ghostWhite;
     transition: .2s;
   }
+
+  @media screen and (max-width: 1000px){
+    top: 2vh;
+  }
 }
