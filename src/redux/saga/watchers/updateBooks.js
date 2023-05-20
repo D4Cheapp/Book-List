@@ -6,8 +6,7 @@ import {UPDATE_BOOKS_TYPE} from "../../actions";
 //Запрос на все книги сервера
 function* updateBooksWorker(){
     const data = yield call(asyncGetBooks);
-    const json = yield call(() => new Promise(res => res(data.json())));
-    yield put(allBooksRequest(json));
+    yield put(allBooksRequest(data));
 }
 
 function* updateBooksWatcher(){

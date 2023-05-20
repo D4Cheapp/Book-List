@@ -21,7 +21,7 @@ function BookList() {
         <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !state})}>
             {state?.length > 0 ?
                 <>
-                    {state.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
+                    {state?.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
                 </>
                 :
                 <>

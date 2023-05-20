@@ -6,8 +6,7 @@ import {FILTER_UPDATE_TYPE} from "../../actions";
 //Запрос книг по фильтру и преобразование их в массив
 function* filterWorker(event){
     const data = yield call(asyncGetBooks, event.filter);
-    const json = yield call(() => new Promise(res => res(data.json())));
-    yield put(bookFilterRequest(json));
+    yield put(bookFilterRequest(data));
 }
 
 function* filterWatcher(){
