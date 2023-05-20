@@ -1,13 +1,9 @@
-//Запрос всех книг
-async function asyncGetBooks() {
-    return await fetch('https://my-json-server.typicode.com/D4Cheapp/Book-List/books')
-        .then(data => data)
-            .catch(error => console.error(error));
-}
+import querystring from "query-string";
 
-//Запрос книг по заданному фильтру
-async function asyncFilterBook(filter){
-    return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books${filter ? `?q=${filter}` : ''}`)
+//Запрос всех книг с возможностью добавления фильтра
+async function asyncGetBooks(filter) {
+    let params = filter ? '?' + querystring.stringify({q: filter}) : '';
+    return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books${params}`)
         .then(data => data)
             .catch(error => console.error(error));
 }
@@ -25,4 +21,4 @@ async function asyncGetBookById(bookId){
         }).catch(error => console.error(error));
 }
 
-export {asyncGetBooks, asyncFilterBook, asyncGetBookById}
+export {asyncGetBooks, asyncGetBookById}

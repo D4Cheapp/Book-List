@@ -49,6 +49,7 @@
     "webpack-hot-middleware": "^2.25.3"
   },
   "dependencies": {
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "query-string": "^8.1.0"
   }
 }
