@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch} from "react-redux";
-import {addBook, deleteBookAction, editBook} from "../../../../redux/actions";
+import {addBook, deleteBookAction, editBook} from "../../../../redux/reducer/jsonServerReducer";
 
 //Кнопки для удаления, сохранения и добавления книг
 function FormButtons({refs, bookInfo, type, bookId}) {

@@ -1,15 +1,15 @@
 import {takeEvery, call} from 'redux-saga/effects';
 import {asyncAddBook} from "../../../api";
-import {ADD_TYPE} from "../../actions";
+import {actionTypes} from "../../reducer/jsonServerReducer";
 
 //Запрос на добавление книги и переадресация на начальную страницу
 function* addBookWorker(action){
-    yield call(asyncAddBook, action.bookInfo);
+    yield call(asyncAddBook, action.payload);
     yield call(() => window.location.href = '/')
 }
 
 function* addBookWatcher(){
-    yield takeEvery(ADD_TYPE, addBookWorker);
+    yield takeEvery(actionTypes.addBook, addBookWorker);
 }
 
 export {addBookWatcher}

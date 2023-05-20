@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import style from './BookList.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {updateBooks} from "../../redux/actions";
 import {BookTemplate} from "./BookTemplate";
 import {useSearchParams} from "react-router-dom";
 import clsx from "clsx";
+import {updateBooks} from "../../redux/reducer/jsonServerReducer";
 
 //Контейнер с книгами
 function BookList() {
-    const state = useSelector(state => state);
+    const state = useSelector(state => state.books);
     const searchParams = useSearchParams()[0].get('search');
     const dispatch = useDispatch();
 
