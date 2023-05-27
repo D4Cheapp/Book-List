@@ -39,29 +39,13 @@ module.exports={
             {
                 //Компиляция обработка scss и css
                 test: /\.(scss|css)$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', {
+                use: ['style-loader', 'css-loader', 'resolve-url-loader', {
                     loader: 'sass-loader',
                     options: {
                         additionalData: '@import "src/style.scss";',
+                        sourceMap: true,
                     }
-                }]
-            },
-            {
-                //Обработка картинок, иконок, svg
-                test: /\.(jpg|png|svg|ico|webp)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[path]/[name].[ext]'
-                    }},
-                    {
-                        // Оптимизация всех изображений
-                        loader: "webp-loader",
-                        options: {
-                            quality: 70
-                        }
-                    }
-                ]
+                }, 'postcss-loader']
             }
         ]
     },
