@@ -8,7 +8,9 @@ import {updateBooks} from "../../redux/reducer/jsonServerReducer";
 
 //Контейнер с книгами
 function BookList() {
-    const state = useSelector(state => state.books);
+    const books = useSelector(state => state.books);
+    const isLoading = useSelector(state => state.isLoading.payload);
+
     const searchParams = useSearchParams()[0].get('search');
     const dispatch = useDispatch();
 
@@ -18,20 +20,29 @@ function BookList() {
     }, []);
 
     return (
-        <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !state})}>
-            {state?.length > 0 ?
+        <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !books})}>
+            {/*Если состояние книг не пустое*/}
+            {books?.length > 0 ?
                 <>
-                    {state?.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
+                    {books?.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
                 </>
                 :
                 <>
+                    {/*Если книг нет, но присутствует фильтрация*/}
                     {searchParams ?
                         <div className={style.errorContainer}>
-                            <p className={style.searchError}>По фильтру {searchParams} ничего не найдено</p>
+                            <p className={style.error}>По фильтру {searchParams} ничего не найдено</p>
                         </div>
                         :
-                        //Заполнение пустыми книгами для загрузки
-                        [...Array(7)].map((book, index) => <BookTemplate key={index} loading={true}/>)
+                        //Если идет загрузка книг
+                        isLoading ?
+                            //Заполнение пустыми книгами для загрузки
+                            [...Array(7)].map((book, index) => <BookTemplate key={index} loading={true}/>)
+                            :
+                            <div className={style.errorContainer}>
+                                <p className={style.error}>Ничего не найдено</p>
+                            </div>
+
                     }
                 </>
             }

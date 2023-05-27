@@ -1,11 +1,13 @@
-import {takeEvery, call} from 'redux-saga/effects';
+import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncAddBook} from "../../../api";
-import {actionTypes} from "../../reducer/jsonServerReducer";
+import {actionTypes, changeLoadingState} from "../../reducer/jsonServerReducer";
 
 //Запрос на добавление книги и переадресация на начальную страницу
 function* addBookWorker(action){
+    yield put(changeLoadingState(true));
     yield call(asyncAddBook, action.payload);
-    yield call(() => window.location.href = '/')
+    yield put(changeLoadingState(false));
+
 }
 
 function* addBookWatcher(){

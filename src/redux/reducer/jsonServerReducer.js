@@ -4,7 +4,7 @@ import creatingActionTypes from "../../utils/creatingActionTypes";
 //Редьюсер запросов на сервер
 const jsonBookServerSlice = createSlice({
    name: 'jsonBookServer',
-   initialState: {books: [], book: {}, type: ''},
+   initialState: {books: [], book: {}, type: '', isLoading: false},
    reducers: {
         //Запрос всех книг с сервера
         allBooksRequest(state, books) {
@@ -50,10 +50,15 @@ const jsonBookServerSlice = createSlice({
         deleteBookAction(state, bookId) {
             return { ...state, type: 'DELETE_TYPE', id: bookId.payload };
         },
+
+        //Изменение состояния загрузки
+        changeLoadingState(state, isLoading){
+            return { ...state, isLoading: isLoading }
+        },
    }
 });
 
 export const actionTypes = creatingActionTypes(jsonBookServerSlice.actions);
 export const {allBooksRequest, bookFilterRequest, bookByIdRequest, updateBooks, filterUpdate,
-    addBook, deleteBookAction, editBook, getBookById} = jsonBookServerSlice.actions;
+    addBook, deleteBookAction, editBook, getBookById, changeLoadingState} = jsonBookServerSlice.actions;
 export default jsonBookServerSlice.reducer;

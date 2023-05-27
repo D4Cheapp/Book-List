@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './FormButtons.module.scss';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addBook, deleteBookAction, editBook} from "../../../../redux/reducer/jsonServerReducer";
+import {useNavigate} from "react-router-dom";
 
 //Кнопки для удаления, сохранения и добавления книг
 function FormButtons({refs, bookInfo, type, bookId}) {
+    const isLoading = useSelector(state => state.isLoading.payload);
+    const [isFormCompleted, setIsFormCompleted] = useState(false);
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //Удаление книги
     function deleteBook() {
         dispatch(deleteBookAction(+bookId));
+        setIsFormCompleted(true);
     }
 
     //Валидация при добавлении новой книги
@@ -43,7 +49,15 @@ function FormButtons({refs, bookInfo, type, bookId}) {
         };
 
         dispatch(isEditType ? editBook(newBookInfo) : addBook(newBookInfo));
+        setIsFormCompleted(true);
     }
+
+    //Переадресация после отправки формы
+    useEffect(() => {
+        if (!isLoading && isFormCompleted){
+            navigate('/');
+        }
+    }, [isLoading, isFormCompleted]);
 
     return (
         <>

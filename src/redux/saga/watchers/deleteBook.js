@@ -1,11 +1,12 @@
-import {takeEvery, call} from 'redux-saga/effects';
+import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncDeleteBook} from "../../../api";
-import {actionTypes} from "../../reducer/jsonServerReducer";
+import {actionTypes, changeLoadingState} from "../../reducer/jsonServerReducer";
 
 //Запрос на удаление книги и переадресация на начальную страницу
 function* deleteBookWorker(action){
+    yield put(changeLoadingState(true));
     yield call(asyncDeleteBook, action.payload);
-    yield call(() => window.location.href = '/')
+    yield put(changeLoadingState(false));
 }
 
 function* deleteBookWatcher(){
