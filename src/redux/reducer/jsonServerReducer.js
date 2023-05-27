@@ -4,7 +4,7 @@ import creatingActionTypes from "../../utils/creatingActionTypes";
 //Редьюсер запросов на сервер
 const jsonBookServerSlice = createSlice({
    name: 'jsonBookServer',
-   initialState: {books: [], book: {}, type: '', isLoading: false},
+   initialState: {books: [], book: {}, isLoading: false},
    reducers: {
         //Запрос всех книг с сервера
         allBooksRequest(state, books) {
@@ -23,32 +23,32 @@ const jsonBookServerSlice = createSlice({
 
         //Обновление всех книг
         updateBooks(state) {
-            return { ...state, type: 'UPDATE_BOOKS' };
+            return { ...state };
         },
 
         //Запрос книг по фильтру
         filterUpdate(state, filter) {
-            return { ...state, type: 'FILTER_UPDATE_TYPE', filter: filter.payload };
+            return { ...state, filter: filter.payload };
         },
 
         //Запрос книги по id
         getBookById(state, bookId) {
-            return { ...state, type: 'GET_BOOK_BY_ID_TYPE', bookId: bookId.payload };
+            return { ...state, bookId: bookId.payload };
         },
 
         //Добавление книги
         addBook(state, bookInfo) {
-            return { ...state, type: 'ADD_TYPE', bookInfo: bookInfo.payload };
+            return { ...state, bookInfo: bookInfo.payload };
         },
 
         //Запрос на изменение книги
         editBook(state, bookInfo) {
-            return { ...state, type: 'EDIT_TYPE', bookInfo: bookInfo.payload };
+            return { ...state, bookInfo: bookInfo.payload };
         },
 
         //Запрос на удаление книги
         deleteBookAction(state, bookId) {
-            return { ...state, type: 'DELETE_TYPE', id: bookId.payload };
+            return { ...state, id: bookId.payload };
         },
 
         //Изменение состояния загрузки

@@ -72,21 +72,3 @@ label.label{
     width: 82%;
   }
 }
-
-
-label.description{
-  height: 40%;
-
-  textarea.input {
-    height: 100%;
-    padding-block: 1.5vh;
-
-    resize: none;
-    @include inputTemplate();
-  }
-
-  @media screen and (max-width: 1000px){
-    height: 30%;
-    width: 75%;
-  }
-}

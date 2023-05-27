@@ -1,9 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import style from './BookForm.module.scss';
-import clsx from "clsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
-import {CloseButton, DateContainer, FormButtons} from "./components";
+import {CloseButton, DateContainer, Description, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
 import {getBookById} from "../../redux/reducer/jsonServerReducer";
 
@@ -13,7 +12,7 @@ function BookForm() {
     const bookId = useParams().bookId;
 
     const type = useSearchParams()[0].get('type');
-    let bookInfo = type === 'add' ? {} : useSelector(state => state.book);
+    const bookInfo = type === 'add' ? {} : useSelector(state => state.book);
 
     const titleRef = useRef();
     const authorRef = useRef();
@@ -35,12 +34,7 @@ function BookForm() {
 
             <DateContainer refs={{dateToRef, dateFromRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
 
-            <label className={clsx(style.label, style.description)}>
-                Описание
-
-                <textarea className={style.input} ref={descriptionRef} disabled={!type}
-                       defaultValue={bookInfo ? bookInfo.description : ''} readOnly={!type}/>
-            </label>
+            <Description refs={{descriptionRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
 
             <FormButtons bookInfo={bookInfo} type={type} bookId={bookId}
                      refs={{dateToRef, dateFromRef, titleRef, authorRef, descriptionRef}} />
