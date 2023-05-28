@@ -12,10 +12,7 @@ button.close{
   border-radius: 5px;
   border: 2px $ghostWhite solid;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  @include cross(2.5vh, 2px);
   transition: .2s;
 
   &:hover{
@@ -24,30 +21,6 @@ button.close{
     &:after, &:before{
       background-color: $oldRose;
     }
-  }
-
-  &:after{
-    content: '';
-    position: absolute;
-
-    width: 2.5vh;
-    height: 2px;
-
-    rotate: -45deg;
-    background-color: $ghostWhite;
-    transition: .2s;
-  }
-
-  &:before{
-    content: '';
-    position: absolute;
-
-    width:  2.5vh;
-    height: 2px;
-
-    rotate: 45deg;
-    background-color: $ghostWhite;
-    transition: .2s;
   }
 
   @media screen and (max-width: 1000px){

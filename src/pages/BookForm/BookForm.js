@@ -36,8 +36,9 @@ function BookForm() {
 
             <Description refs={{descriptionRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
 
-            <FormButtons bookInfo={bookInfo} type={type} bookId={bookId}
-                     refs={{dateToRef, dateFromRef, titleRef, authorRef, descriptionRef}} />
+            {type && <FormButtons bookInfo={bookInfo} type={type} bookId={bookId}
+                          refs={{dateToRef, dateFromRef, titleRef, authorRef, descriptionRef}} />
+            }
 
             <CloseButton/>
         </form>

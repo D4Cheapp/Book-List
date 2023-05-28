@@ -1,11 +1,18 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncEditBook} from "../../../api";
-import {actionTypes, changeLoadingState} from "../../reducer/jsonServerReducer";
+import {actionTypes, changeFormState, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
-//Запрос на изменение книги и переадресация на начальную страницу
+//Запрос на изменение книги
 function* editBookWorker(action){
     yield put(changeLoadingState(true));
-    yield call(asyncEditBook, action.payload);
+
+    const respond = yield call(asyncEditBook, action.payload);
+    yield put(changeFormState(!(respond instanceof Error)));
+
+    if (respond instanceof Error) {
+        yield put(setErrorState(respond.message));
+    }
+
     yield put(changeLoadingState(false));
 }
 

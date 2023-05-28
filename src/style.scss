@@ -87,3 +87,34 @@ body{
     width: 75%;
   }
 }
+
+
+@mixin cross($width, $thick){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:after{
+    content: '';
+    position: absolute;
+
+    width: $width;
+    height: $thick;
+
+    rotate: -45deg;
+    background-color: $ghostWhite;
+    transition: .2s;
+  }
+
+  &:before{
+    content: '';
+    position: absolute;
+
+    width: $width;
+    height: $thick;
+
+    rotate: 45deg;
+    background-color: $ghostWhite;
+    transition: .2s;
+  }
+}

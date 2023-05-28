@@ -1,15 +1,16 @@
 import React from 'react';
-import {AddBookButton, Header} from "./components";
-import {BookList} from "./pages";
-import style from "./App.module.scss";
+import {ErrorMessage} from "./components";
+import {useSelector} from "react-redux";
+import {Outlet} from "react-router-dom";
 
 function App() {
+    const isError = useSelector(state => state.error);
+
     return (
-        <section className={style.listContainer}>
-            <Header/>
-            <BookList/>
-            <AddBookButton/>
-        </section>
+        <>
+            { isError !== '' && <ErrorMessage/> }
+            <Outlet/>
+        </>
     );
 }
 
