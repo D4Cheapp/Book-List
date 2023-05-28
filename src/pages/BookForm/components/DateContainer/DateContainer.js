@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import style from './DateContainer.module.scss';
+import React, {useContext, useEffect, useState} from 'react';
 import InputMask from "react-input-mask";
+import {BookFormContext} from "../../../../utils/bookFormContext";
+import clsx from "clsx";
 
 //Контейнер для дат начала и конца прочтения книги
-function DateContainer({refs, bookInfo, parentStyle, type}) {
+function DateContainer() {
+    const {bookInfo, refs, style, type, isDateFromError, isDateToError} = useContext(BookFormContext);
 
     const [dateFromValue, setDateFromValue] = useState('');
     const [dateToValue, setDateToValue] = useState('');
@@ -23,12 +25,16 @@ function DateContainer({refs, bookInfo, parentStyle, type}) {
     },[bookInfo]);
 
     return (
-        <div className={parentStyle.inputContainer}>
+        <div className={style.inputContainer}>
             <label className={style.label}>
                 Дата начала чтения
 
                 <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={!type}
                        ref={refs.dateFromRef} onChange={onDateFromChange} value={dateFromValue} readOnly={!type}/>
+
+                <p className={clsx(style.error, {[style.hiddenError]: !isDateFromError})}>
+                    Дата введена неверно
+                </p>
             </label>
 
             <label className={style.label}>
@@ -36,6 +42,10 @@ function DateContainer({refs, bookInfo, parentStyle, type}) {
 
                 <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={!type}
                        ref={refs.dateToRef} onChange={onDateToChange} value={dateToValue} readOnly={!type}/>
+
+                <p className={clsx(style.error, {[style.hiddenError]: !isDateToError})}>
+                    Дата введена неверно
+                </p>
             </label>
         </div>
     );

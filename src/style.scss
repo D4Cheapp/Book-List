@@ -51,44 +51,6 @@ body{
 }
 
 
-@mixin inputTemplate(){
-  outline: none;
-  box-sizing: border-box;
-
-  padding-block: 1vh;
-  padding-inline: 2vh;
-
-  font-size: 2.3vh;
-  color: $ghostWhite;
-
-  background: $gunmetal;
-  border: 2px $ghostWhite solid;
-
-  &::placeholder {
-    color: $ghostWhite;
-    opacity: .5;
-  }
-}
-
-
-@mixin labelTemplate(){
-  display: inline-flex;
-  flex-direction: column;
-  gap: 1vh;
-
-  font-size: 2.5vh;
-  width: 45%;
-
-  @media screen and (max-width: 1400px){
-      width: 50%;
-  }
-
-  @media screen and (max-width: 1000px){
-    width: 75%;
-  }
-}
-
-
 @mixin cross($width, $thick){
   display: flex;
   justify-content: center;

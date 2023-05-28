@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import style from './Description.module.scss';
+import React, {useContext, useEffect, useState} from 'react';
+import selfStyle from './Description.module.scss';
+import {BookFormContext} from "../../../../utils/bookFormContext";
 import clsx from "clsx";
 
-function Description({parentStyle, bookInfo, refs, type}) {
+function Description() {
+    const {bookInfo, refs, type, style} = useContext(BookFormContext);
+
     const [description, setDescription] = useState();
 
     useEffect(() => {
@@ -10,10 +13,10 @@ function Description({parentStyle, bookInfo, refs, type}) {
     }, [bookInfo]);
 
     return (
-        <label className={clsx(parentStyle.label, style.description)}>
+        <label className={clsx(style.label, selfStyle.description)}>
             Описание
 
-            <textarea className={style.input} ref={refs.descriptionRef}
+            <textarea className={selfStyle.input} ref={refs.descriptionRef}
                       disabled={!type} defaultValue={description} readOnly={!type}/>
         </label>
     );

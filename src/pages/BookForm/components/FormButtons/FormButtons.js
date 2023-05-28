@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {addBook, deleteBookAction, editBook} from "../../../../redux/reducer/jsonServerReducer";
+import {addBook, changeFormState, deleteBookAction, editBook} from "../../../../redux/reducer/jsonServerReducer";
 import {useNavigate} from "react-router-dom";
+import {BookFormContext} from "../../../../utils/bookFormContext";
 
 //Кнопки для удаления, сохранения и добавления книг
-function FormButtons({refs, bookInfo, type, bookId}) {
+function FormButtons() {
+    const {bookInfo, refs, type, bookId,
+        setIsDateFromError, setIsDateToError, setIsTitleError} = useContext(BookFormContext);
+
     const isLoading = useSelector(state => state.isLoading);
     const isFormCompleted = useSelector(state => state.isFormCompleted);
 
@@ -26,14 +30,13 @@ function FormButtons({refs, bookInfo, type, bookId}) {
         const dateTo = refs.dateToRef.current?.value;
 
         //Проверка правильности названия
-        if (!title.trim()){
-            alert('Пожалуйста введите название книги');
-            return false
-        }
+        setIsTitleError(!title.trim());
+        //Проверка правильности даты начала чтения
+        setIsDateFromError(dateFrom.split('').includes('_'));
+        //Проверка правильности даты окончания чтения
+        setIsDateToError(dateTo.split('').includes('_'));
 
-        //Проверка правильности дат
-        if ((dateFrom + dateTo).split('').includes('_')){
-            alert('Дата введена неверно. Введите дату в формате ДД-ММ-ГГГГ');
+        if (dateTo.split('').includes('_') || dateFrom.split('').includes('_') || !title.trim()){
             return false
         }
 
@@ -42,9 +45,9 @@ function FormButtons({refs, bookInfo, type, bookId}) {
             title: title.replace(/\s+/gm,' ').trim(),
             author: author.replace(/\s+/gm,' ').trim(),
             description: description.replace(/\s+/gm,' ').trim(),
+            id: isEditType ? bookInfo.id : Date.now(),
             dateFrom,
             dateTo,
-            id: isEditType ? bookInfo.id : Date.now(),
         };
 
         dispatch(isEditType ? editBook(newBookInfo) : addBook(newBookInfo));
@@ -54,6 +57,7 @@ function FormButtons({refs, bookInfo, type, bookId}) {
     useEffect(() => {
         if (!isLoading && isFormCompleted){
             navigate('/');
+            dispatch(changeFormState(false));
         }
     }, [isLoading, isFormCompleted]);
 

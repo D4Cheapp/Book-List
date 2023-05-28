@@ -1,10 +1,11 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import style from './BookForm.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useParams, useSearchParams} from "react-router-dom";
 import {CloseButton, DateContainer, Description, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
 import {getBookById} from "../../redux/reducer/jsonServerReducer";
+import {BookFormContext} from "../../utils/bookFormContext";
 
 //Форма для добавления / редактирования / просмотра книг
 function BookForm() {
@@ -20,6 +21,10 @@ function BookForm() {
     const dateFromRef = useRef();
     const dateToRef = useRef();
 
+    const [isTitleError, setIsTitleError] = useState(false);
+    const [isDateFromError, setIsDateFromError] = useState(false);
+    const [isDateToError, setIsDateToError] = useState(false);
+
     //Если книга не добавляется, то она запрашивается по id
     useEffect(() => {
         if (type !== 'add'){
@@ -28,20 +33,24 @@ function BookForm() {
     },[]);
 
     return (
-        <form className={style.form} onSubmit={(event) => event.preventDefault()}>
+        <BookFormContext.Provider value={{
+            refs:{dateToRef, dateFromRef, titleRef, authorRef, descriptionRef}, bookInfo, bookId, type, style,
+            isDateFromError, isTitleError, isDateToError, setIsDateFromError, setIsDateToError, setIsTitleError
+        }}>
+            <form className={style.form} onSubmit={(event) => event.preventDefault()}>
 
-            <TitleContainer refs={{titleRef, authorRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
+                <TitleContainer/>
 
-            <DateContainer refs={{dateToRef, dateFromRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
+                <DateContainer/>
 
-            <Description refs={{descriptionRef}} bookInfo={bookInfo} parentStyle={style} type={type}/>
+                <Description/>
 
-            {type && <FormButtons bookInfo={bookInfo} type={type} bookId={bookId}
-                          refs={{dateToRef, dateFromRef, titleRef, authorRef, descriptionRef}} />
-            }
+                {type && <FormButtons/>}
 
-            <CloseButton/>
-        </form>
+                <CloseButton/>
+            </form>
+        </BookFormContext.Provider>
+
     );
 }
 
