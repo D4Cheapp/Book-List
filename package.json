@@ -2,7 +2,7 @@
   "name": "book-list",
   "version": "0.1.0",
   "private": false,
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "homepage": "https://d4cheapp.github.io/Book-List/",
   "scripts": {
     "start": "webpack-dev-server",

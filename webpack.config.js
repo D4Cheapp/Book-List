@@ -6,7 +6,7 @@ module.exports={
     //Режим проекта и точка входа
     mode: 'development',
     entry: {
-        main: path.resolve(__dirname,'./src/index.js'),
+        main: path.resolve(__dirname,'./src/index.jsx'),
     },
     optimization: {
         runtimeChunk: 'single',
