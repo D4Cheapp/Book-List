@@ -43,10 +43,146 @@
     {
       "title": "Отверженные",
       "author": "Виктор Гюго",
-      "description": "После девятнадцатилетнего заключения бывший каторжник перестал верить в простые человеческие чувства. Но его мировоззрение меняет встреча с католическим епископом, и из отверженного он превращается в одну из главных фигур города.",
+      "description": "",
       "dateFrom": "",
       "dateTo": "",
       "id": 6
+    },
+    {
+      "title": "1984",
+      "author": "Джордж Оруэлл",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 7
+    },
+    {
+      "title": "Война и мир",
+      "author": "Лев Толстой",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 8
+    },
+    {
+      "title": "Мастер и Маргарита",
+      "author": "Михаил Булгаков",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 9
+    },
+    {
+      "title": "Гарри Поттер и философский камень",
+      "author": "Джоан Роулинг",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 10
+    },
+    {
+      "title": "Преступление и наказание",
+      "author": "Федор Достоевский",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 11
+    },
+    {
+      "title": "Маленький принц",
+      "author": "Антуан де Сент-Экзюпери",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 12
+    },
+    {
+      "title": "Над пропастью во ржи",
+      "author": "Джером Д. Сэлинджер",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 13
+    },
+    {
+      "title": "Три товарища",
+      "author": "Эрих Мария Ремарк",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 14
+    },
+    {
+      "title": "Тень горы",
+      "author": "Грегори Дэвид Робертс",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 15
+    },
+    {
+      "title": "Милый друг",
+      "author": "Элизабет Хармон",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 16
+    },
+    {
+      "title": "Атлант расправил плечи",
+      "author": "Айн Рэнд",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 17
+    },
+    {
+      "title": "Властелин колец",
+      "author": "Дж.R.R. Толкин",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 18
+    },
+    {
+      "title": "Алхимик",
+      "author": "Пауло Коэльо",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 19
+    },
+    {
+      "title": "451 градус по Фаренгейту",
+      "author": "Рэй Брэдбери",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 20
+    },
+    {
+      "title": "Анна Каренина",
+      "author": "Лев Толстой",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 21
+    },
+    {
+      "title": "Улисс",
+      "author": "Джеймс Джойс",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 22
+    },
+    {
+      "title": "Гордость и предубеждение",
+      "author": "Джейн Остин",
+      "description": "",
+      "dateFrom": "",
+      "dateTo": "",
+      "id": 23
     }
   ]
 }
