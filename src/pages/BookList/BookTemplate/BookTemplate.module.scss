@@ -48,20 +48,29 @@ div.book{
     background-position-x: center;
     background-position-y: center;
 
-    transition: border .2s;
+    transition: border, background-image .2s;
   }
 
   img.pencil, img.lens{
     width: 60%;
-    transition: .2s;
   }
 
-  button.edit:hover{
-    border-color: $ecru;
+  button.edit{
+    background-image: url('../../../images/edit-pencil.svg');
+
+    &:hover{
+      background-image: url('../../../images/edit-pencil-active.svg');
+      border-color: $ecru;
+    }
   }
 
-  button.view:hover{
-    border-color: $skyBlue;
+  button.view{
+    background-image: url('../../../images/quick-view.svg');
+
+    &:hover{
+      background-image: url('../../../images/quick-view-active.svg');
+      border-color: $skyBlue;
+    }
   }
 
   button.buttonLoading{

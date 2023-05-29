@@ -1,3 +1,5 @@
+import throwFetchError from "../utils/throwFetchError";
+
 //Запрос на добавление книги
 async function asyncAddBook(bookInfo){
     return await fetch('https://my-json-server.typicode.com/D4Cheapp/Book-List/books', {
@@ -7,14 +9,18 @@ async function asyncAddBook(bookInfo){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(bookInfo)
-    }).catch(error => console.error(error));
+    })
+        .then(response => response.ok ? response : throwFetchError('Ошибка добавления книги'))
+        .catch(error => error);
 }
 
 //Запрос на удаление книги с сервера
 async function asyncDeleteBook(bookID){
     return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books/${bookID}`,
         {method: 'DELETE'}
-    ).catch(error => console.error(error));
+    )
+        .then(response => response.ok ? response : throwFetchError('Ошибка удаления книги'))
+        .catch(error => error);
 }
 
 //Запрос на изменение книги
@@ -25,7 +31,9 @@ async function asyncEditBook(bookInfo){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(bookInfo)
-    }).catch(error => console.error(error));
+    })
+        .then(response => response.ok ? response : throwFetchError('Ошибка изменения книги'))
+        .catch(error => error);
 }
 
 

@@ -1,15 +1,23 @@
-import {takeEvery, call} from 'redux-saga/effects';
+import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncDeleteBook} from "../../../api";
-import {DELETE_TYPE} from "../../actions";
+import {actionTypes, changeFormState, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
-//Запрос на удаление книги и переадресация на начальную страницу
+//Запрос на удаление книги
 function* deleteBookWorker(action){
-    yield call(asyncDeleteBook, action.id);
-    yield call(() => window.location.href = '/')
+    yield put(changeLoadingState(true));
+
+    const respond = yield call(asyncDeleteBook, action.payload);
+    yield put(changeFormState(!(respond instanceof Error)));
+
+    if (respond instanceof Error) {
+        yield put(setErrorState(respond.message));
+    }
+
+    yield put(changeLoadingState(false));
 }
 
 function* deleteBookWatcher(){
-    yield takeEvery(DELETE_TYPE, deleteBookWorker);
+    yield takeEvery(actionTypes.deleteBookAction, deleteBookWorker);
 }
 
 export {deleteBookWatcher}

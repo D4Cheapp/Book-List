@@ -1,17 +1,24 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
 import {asyncGetBooks} from "../../../api";
-import {allBooksRequest} from "../../reducer/jsonServerReducer";
-import {UPDATE_BOOKS_TYPE} from "../../actions";
+import {actionTypes, allBooksRequest, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
 //Запрос на все книги сервера
 function* updateBooksWorker(){
+    yield put(changeLoadingState(true));
+
     const data = yield call(asyncGetBooks);
-    const json = yield call(() => new Promise(res => res(data.json())));
-    yield put(allBooksRequest(json));
+    if (data instanceof Error) {
+        yield put(setErrorState(data.message));
+    }
+    else {
+        yield put(allBooksRequest(data));
+    }
+
+    yield put(changeLoadingState(false));
 }
 
 function* updateBooksWatcher(){
-    yield takeEvery(UPDATE_BOOKS_TYPE, updateBooksWorker);
+    yield takeEvery(actionTypes.updateBooks, updateBooksWorker);
 }
 
 export {updateBooksWatcher}

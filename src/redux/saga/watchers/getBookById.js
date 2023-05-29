@@ -1,17 +1,24 @@
 import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncGetBookById} from "../../../api";
-import {bookByIdRequest} from "../../reducer/jsonServerReducer";
-import {GET_BOOK_BY_ID_TYPE} from "../../actions";
+import {actionTypes, bookByIdRequest, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
 //Запрос книги по id
 function* getBookByIdWorker(action){
-    const data = yield call(asyncGetBookById, action.bookId);
-    const json = yield call(() => new Promise(res => res(data?.json())));
-    yield put(bookByIdRequest(json));
+    yield put(changeLoadingState(true));
+
+    const data = yield call(asyncGetBookById, action.payload);
+    if (data instanceof Error) {
+        yield put(setErrorState(data.message));
+    }
+    else {
+        yield put(bookByIdRequest(data));
+    }
+
+    yield put(changeLoadingState(false));
 }
 
 function* getBookByIdWatcher(){
-    yield takeEvery(GET_BOOK_BY_ID_TYPE, getBookByIdWorker);
+    yield takeEvery(actionTypes.getBookById, getBookByIdWorker);
 }
 
 export {getBookByIdWatcher}

@@ -51,39 +51,32 @@ body{
 }
 
 
-@mixin inputTemplate(){
-  outline: none;
-  box-sizing: border-box;
+@mixin cross($width, $thick){
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  padding-block: 1vh;
-  padding-inline: 2vh;
+  &:after{
+    content: '';
+    position: absolute;
 
-  font-size: 2.3vh;
-  color: $ghostWhite;
+    width: $width;
+    height: $thick;
 
-  background: $gunmetal;
-  border: 2px $ghostWhite solid;
-
-  &::placeholder {
-    color: $ghostWhite;
-    opacity: .5;
-  }
-}
-
-
-@mixin labelTemplate(){
-  display: inline-flex;
-  flex-direction: column;
-  gap: 1vh;
-
-  font-size: 2.5vh;
-  width: 45%;
-
-  @media screen and (max-width: 1400px){
-      width: 50%;
+    rotate: -45deg;
+    background-color: $ghostWhite;
+    transition: .2s;
   }
 
-  @media screen and (max-width: 1000px){
-    width: 75%;
+  &:before{
+    content: '';
+    position: absolute;
+
+    width: $width;
+    height: $thick;
+
+    rotate: 45deg;
+    background-color: $ghostWhite;
+    transition: .2s;
   }
 }

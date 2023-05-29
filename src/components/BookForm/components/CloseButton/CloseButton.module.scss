@@ -1,0 +1,29 @@
+button.close{
+  position: absolute;
+  top: 5%;
+  right: 3%;
+
+  aspect-ratio: 1 / 1;
+  width: 5vh;
+
+  cursor: pointer;
+  background-color: $gunmetal;
+
+  border-radius: 5px;
+  border: 2px $ghostWhite solid;
+
+  @include cross(2.5vh, 2px);
+  transition: .2s;
+
+  &:hover{
+    border-color: $oldRose;
+
+    &:after, &:before{
+      background-color: $oldRose;
+    }
+  }
+
+  @media screen and (max-width: 1000px){
+    top: 2vh;
+  }
+}

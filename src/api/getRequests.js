@@ -1,28 +1,22 @@
-//Запрос всех книг
-async function asyncGetBooks() {
-    return await fetch('https://my-json-server.typicode.com/D4Cheapp/Book-List/books')
-        .then(data => data)
-            .catch(error => console.error(error));
-}
+import querystring from "query-string";
+import throwFetchError from "../utils/throwFetchError";
 
-//Запрос книг по заданному фильтру
-async function asyncFilterBook(filter){
-    return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books${filter ? `?q=${filter}` : ''}`)
-        .then(data => data)
-            .catch(error => console.error(error));
+//Запрос всех книг с возможностью добавления фильтра
+async function asyncGetBooks(filter) {
+    let params = filter ? '?' + querystring.stringify({q: filter}) : '';
+
+    return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books${params}`)
+        .then(response => response.ok ? response : throwFetchError('Ошибка получения книг'))
+        .then(res => res.json())
+        .catch(error => error);
 }
 
 //Запрос книги по ее id
 async function asyncGetBookById(bookId){
     return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books/${bookId}`)
-        .then(data => {
-            if (data.status !== 404){
-                return data
-            }
-            else{
-                window.location.replace('/#/404')
-            }
-        }).catch(error => console.error(error));
+        .then(response => response.ok ? response : throwFetchError('Ошибка получения книги по id'))
+        .then(res => res.json())
+        .catch(error => error);
 }
 
-export {asyncGetBooks, asyncFilterBook, asyncGetBookById}
+export {asyncGetBooks, asyncGetBookById}

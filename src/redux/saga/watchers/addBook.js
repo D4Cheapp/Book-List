@@ -1,15 +1,23 @@
-import {takeEvery, call} from 'redux-saga/effects';
+import {takeEvery, call, put} from 'redux-saga/effects';
 import {asyncAddBook} from "../../../api";
-import {ADD_TYPE} from "../../actions";
+import {actionTypes, changeFormState, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
-//Запрос на добавление книги и переадресация на начальную страницу
+//Запрос на добавление книги
 function* addBookWorker(action){
-    yield call(asyncAddBook, action.bookInfo);
-    yield call(() => window.location.href = '/')
+    yield put(changeLoadingState(true));
+
+    const respond = yield call(asyncAddBook, action.payload);
+    yield put(changeFormState(!(respond instanceof Error)));
+
+    if (respond instanceof Error) {
+        yield put(setErrorState(respond.message));
+    }
+
+    yield put(changeLoadingState(false));
 }
 
 function* addBookWatcher(){
-    yield takeEvery(ADD_TYPE, addBookWorker);
+    yield takeEvery(actionTypes.addBook, addBookWorker);
 }
 
 export {addBookWatcher}
