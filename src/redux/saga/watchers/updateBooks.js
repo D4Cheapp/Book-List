@@ -3,10 +3,10 @@ import {asyncGetBooks} from "../../../api";
 import {actionTypes, allBooksRequest, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
 //Запрос на все книги сервера
-function* updateBooksWorker(){
+function* updateBooksWorker(action){
     yield put(changeLoadingState(true));
 
-    const data = yield call(asyncGetBooks);
+    const data = yield call(asyncGetBooks, undefined, action.payload.page, action.payload.limit);
     if (data instanceof Error) {
         yield put(setErrorState(data.message));
     }

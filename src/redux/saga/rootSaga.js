@@ -1,7 +1,7 @@
 import {all} from 'redux-saga/effects';
 import {addBookWatcher, deleteBookWatcher,
     editBookWatcher, filterWatcher,
-    getBookByIdWatcher, updateBooksWatcher
+    getBookByIdWatcher, updateBooksWatcher,
 } from "./watchers";
 
 //Создание корневой саги со всеми вотчерами

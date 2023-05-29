@@ -4,11 +4,13 @@ import creatingActionTypes from "../../utils/creatingActionTypes";
 //Редьюсер запросов на сервер
 const jsonBookServerSlice = createSlice({
    name: 'jsonBookServer',
-   initialState: {books: [], book: {}, isLoading: false, isFormCompleted: false, error: ''},
+   initialState: {books: [], book: {}, isLoading: false, isFormCompleted: false, error: '', maxPage: 1},
    reducers: {
         //Запрос всех книг с сервера
-        allBooksRequest(state, books) {
-            return { ...state, books: books.payload };
+        allBooksRequest(state, data) {
+            const books = [...state.books, ...data.payload.data];
+            const maxPage = +data.payload.totalCount;
+            return { ...state, books, maxPage };
         },
 
         //Запрос книг по фильтру
@@ -22,8 +24,8 @@ const jsonBookServerSlice = createSlice({
         },
 
         //Обновление всех книг
-        updateBooks(state) {
-            return { ...state };
+        updateBooks(state, pagination) {
+            return { ...state, page: pagination.payload.page, limit: pagination.payload.limit};
         },
 
         //Запрос книг по фильтру
@@ -69,6 +71,7 @@ const jsonBookServerSlice = createSlice({
 });
 
 export const actionTypes = creatingActionTypes(jsonBookServerSlice.actions);
-export const {allBooksRequest, bookFilterRequest, bookByIdRequest, updateBooks, filterUpdate, changeFormState, addBook,
-    setErrorState, deleteBookAction, editBook, getBookById, changeLoadingState} = jsonBookServerSlice.actions;
+export const {allBooksRequest, bookFilterRequest, bookByIdRequest, updateBooks,
+    filterUpdate, changeFormState, addBook, setErrorState, deleteBookAction,
+        editBook, getBookById, changeLoadingState} = jsonBookServerSlice.actions;
 export default jsonBookServerSlice.reducer;
