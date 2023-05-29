@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 //Контейнер для названия и автора книги
 function TitleContainer() {
-    const {bookInfo, refs, style, type, isTitleError} = useContext(BookFormContext);
+    const {bookInfo, refs, style, isView, isTitleError} = useContext(BookFormContext);
 
     const [author, setAuthor] = useState('');
     const [title, setTitle] = useState('');
@@ -19,8 +19,8 @@ function TitleContainer() {
             <label className={style.label}>
                 Название книги
 
-                <input className={style.input} type="text" ref={refs.titleRef} disabled={!type}
-                       defaultValue={title} readOnly={!type}/>
+                <input className={style.input} type="text" ref={refs.titleRef} disabled={isView}
+                       defaultValue={title} readOnly={isView}/>
 
                 <p className={clsx(style.error, {[style.hiddenError]: !isTitleError})}>
                     Введите название книги
@@ -30,8 +30,8 @@ function TitleContainer() {
             <label className={style.label}>
                 Автор книги
 
-                <input className={style.input} type="text" ref={refs.authorRef} disabled={!type}
-                       defaultValue={author} readOnly={!type}/>
+                <input className={style.input} type="text" ref={refs.authorRef} disabled={isView}
+                       defaultValue={author} readOnly={isView}/>
             </label>
         </div>
     );

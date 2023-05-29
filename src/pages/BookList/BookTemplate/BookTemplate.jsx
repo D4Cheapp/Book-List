@@ -9,12 +9,12 @@ function BookTemplate({bookInfo, loading}) {
 
     //Перемещение на страницу редактирования книги
     function navigateToEdit() {
-        navigate({pathname: `/book/${bookInfo.id}/`, search: `type=edit`})
+        navigate(`/book/edit/${bookInfo.id}`);
     }
 
     //Перемещение на страницу просмотра книги
     function navigateToView() {
-        navigate(`/book/${bookInfo.id}`)
+        navigate(`/book/${bookInfo.id}`);
     }
 
     return (

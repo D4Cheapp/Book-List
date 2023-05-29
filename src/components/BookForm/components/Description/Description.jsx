@@ -4,7 +4,7 @@ import {BookFormContext} from "../../../../utils/bookFormContext";
 import clsx from "clsx";
 
 function Description() {
-    const {bookInfo, refs, type, style} = useContext(BookFormContext);
+    const {bookInfo, refs, isView, style} = useContext(BookFormContext);
 
     const [description, setDescription] = useState();
 
@@ -17,7 +17,7 @@ function Description() {
             Описание
 
             <textarea className={selfStyle.input} ref={refs.descriptionRef}
-                      disabled={!type} defaultValue={description} readOnly={!type}/>
+                      disabled={isView} defaultValue={description} readOnly={isView}/>
         </label>
     );
 }

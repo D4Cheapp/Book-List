@@ -8,7 +8,7 @@ function ErrorPage() {
     return (
         <div className={style.container}>
             <p className={style.title}>
-                Страница не найдена. Ошибка 404.
+                Страница не найдена
             </p>
 
             <button className={style.button} onClick={() => navigate('/')}>

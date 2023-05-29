@@ -8,10 +8,7 @@ function AddBookButton() {
 
     return (
         <div className={style.buttonContainer}>
-            <button className={style.addButton} onClick={() => navigate({
-                pathname: '/book/',
-                search: `type=add`,
-            })}/>
+            <button className={style.addButton} onClick={() => navigate('book/add')}/>
         </div>
     );
 }

@@ -7,7 +7,7 @@ import {BookFormContext} from "../../../../utils/bookFormContext";
 
 //Кнопки для удаления, сохранения и добавления книг
 function FormButtons() {
-    const {bookInfo, refs, type, bookId,
+    const {bookInfo, refs, isAdd, isEdit, bookId,
         setIsDateFromError, setIsDateToError, setIsTitleError} = useContext(BookFormContext);
 
     const isLoading = useSelector(state => state.isLoading);
@@ -40,17 +40,16 @@ function FormButtons() {
             return false
         }
 
-        const isEditType = type === 'edit';
         const newBookInfo = {
             title: title.replace(/\s+/gm,' ').trim(),
             author: author.replace(/\s+/gm,' ').trim(),
             description: description.replace(/\s+/gm,' ').trim(),
-            id: isEditType ? bookInfo.id : Date.now(),
+            id: isEdit ? bookInfo.id : Date.now(),
             dateFrom,
             dateTo,
         };
 
-        dispatch(isEditType ? editBook(newBookInfo) : addBook(newBookInfo));
+        dispatch(isEdit ? editBook(newBookInfo) : addBook(newBookInfo));
     }
 
     //Переадресация после отправки формы
@@ -64,10 +63,10 @@ function FormButtons() {
     return (
         <div className={style.buttonContainer}>
             <button type='button' className={style.add} onClick={formValidation}>
-                {type === 'add' ? 'Добавить' : 'Сохранить'}
+                {isAdd ? 'Добавить' : 'Сохранить'}
             </button>
 
-            {type === 'edit' &&
+            {isEdit &&
                 <button className={style.delete} type='button' onClick={deleteBook}>
                     Удалить
                 </button>

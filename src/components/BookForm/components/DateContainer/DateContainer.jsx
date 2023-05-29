@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 //Контейнер для дат начала и конца прочтения книги
 function DateContainer() {
-    const {bookInfo, refs, style, type, isDateFromError, isDateToError} = useContext(BookFormContext);
+    const {bookInfo, refs, style, isView, isDateFromError, isDateToError} = useContext(BookFormContext);
 
     const [dateFromValue, setDateFromValue] = useState('');
     const [dateToValue, setDateToValue] = useState('');
@@ -29,8 +29,8 @@ function DateContainer() {
             <label className={style.label}>
                 Дата начала чтения
 
-                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={!type}
-                       ref={refs.dateFromRef} onChange={onDateFromChange} value={dateFromValue} readOnly={!type}/>
+                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={isView}
+                       ref={refs.dateFromRef} onChange={onDateFromChange} value={dateFromValue} readOnly={isView}/>
 
                 <p className={clsx(style.error, {[style.hiddenError]: !isDateFromError})}>
                     Дата введена неверно
@@ -40,8 +40,8 @@ function DateContainer() {
             <label className={style.label}>
                 Дата прочтения
 
-                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={!type}
-                       ref={refs.dateToRef} onChange={onDateToChange} value={dateToValue} readOnly={!type}/>
+                <InputMask className={style.input} mask='99.99.9999' placeholder='ДД.ММ.ГГГГ' disabled={isView}
+                       ref={refs.dateToRef} onChange={onDateToChange} value={dateToValue} readOnly={isView}/>
 
                 <p className={clsx(style.error, {[style.hiddenError]: !isDateToError})}>
                     Дата введена неверно
