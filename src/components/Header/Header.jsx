@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {filterUpdate, updateBooks} from "../../redux/reducer/jsonServerReducer";
 
 //Заголовок со строкой фильтрации
-function Header() {
+function Header({setPage}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -16,8 +16,9 @@ function Header() {
     function searchParamsFilter() {
         if (searchParams === ''){
             navigate('/');
-            dispatch(updateBooks());
             inputRef.current.value = '';
+            setPage(0);
+            dispatch(updateBooks( {page: 0, replace: true}));
         }
         else if (searchParams){
             dispatch(filterUpdate(searchParams));
