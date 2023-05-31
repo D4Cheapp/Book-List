@@ -4,18 +4,19 @@ import creatingActionTypes from "../../utils/creatingActionTypes";
 //Редьюсер запросов на сервер
 const jsonBookServerSlice = createSlice({
    name: 'jsonBookServer',
-   initialState: {books: [], book: {}, isLoading: false, isFormCompleted: false, error: '', maxPage: 1},
+   initialState: { books: [], book: {}, isLoading: false, isFormCompleted: false, error: '', maxPage: 1 },
    reducers: {
         //Запрос всех книг с сервера
         allBooksRequest(state, data) {
-            const books = [...state.books, ...data.payload.data];
+            const replace = data.payload.replace;
+            const books = replace ? [...data.payload.data] : [...state.books, ...data.payload.data];
             const maxPage = +data.payload.totalCount;
             return { ...state, books, maxPage };
         },
 
         //Запрос книг по фильтру
         bookFilterRequest(state, filteredBooks) {
-            return { ...state, books: filteredBooks.payload };
+            return { ...state, books: [...filteredBooks.payload.data] };
         },
 
         //Запрос книги по id
@@ -25,7 +26,7 @@ const jsonBookServerSlice = createSlice({
 
         //Обновление всех книг
         updateBooks(state, pagination) {
-            return { ...state, page: pagination.payload.page, limit: pagination.payload.limit};
+            return { ...state, page: pagination.payload.page};
         },
 
         //Запрос книг по фильтру

@@ -2,10 +2,10 @@ import React, {useEffect, useRef} from 'react';
 import style from './Header.module.scss';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {filterUpdate} from "../../redux/reducer/jsonServerReducer";
+import {filterUpdate, updateBooks} from "../../redux/reducer/jsonServerReducer";
 
 //Заголовок со строкой фильтрации
-function Header() {
+function Header({setPage}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -17,6 +17,8 @@ function Header() {
         if (searchParams === ''){
             navigate('/');
             inputRef.current.value = '';
+            setPage(0);
+            dispatch(updateBooks( {page: 0, replace: true}));
         }
         else if (searchParams){
             dispatch(filterUpdate(searchParams));

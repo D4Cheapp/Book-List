@@ -2,8 +2,8 @@ import querystring from "query-string";
 import throwFetchError from "../utils/throwFetchError";
 
 //Запрос всех книг с возможностью добавления фильтра
-async function asyncGetBooks(filter, page, limit) {
-    const paginationParams = '?' + querystring.stringify({'_limit': limit, '_page': page});
+async function asyncGetBooks(filter, page) {
+    const paginationParams = '?' + querystring.stringify({'_limit': 5, '_page': page});
     const filterParams = filter ? '&' + querystring.stringify({q: filter}) : '';
 
     return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/` +

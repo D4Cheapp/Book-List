@@ -31,19 +31,19 @@ function BookList() {
 
     //Загрузка книг при рендере компонента
     useEffect(() => {
-        dispatch(updateBooks({page, limit: 5}));
+        dispatch(updateBooks({page, replace: true}));
     }, []);
 
     //Загрузка книг при рендере компонента
     useEffect(() => {
         if (page > 1 && !isLoading){
-            dispatch(updateBooks({page, limit: 5}));
+            dispatch(updateBooks({page, replace: false}));
         }
     }, [page]);
 
     return (
         <section className={style.listContainer}>
-            <Header/>
+            <Header setPage={setPage}/>
 
             <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !books})} onScroll={onBookScroll}>
                 {/*Если состояние книг не пустое*/}
