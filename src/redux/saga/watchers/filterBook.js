@@ -1,6 +1,6 @@
 import {put, takeEvery, call} from 'redux-saga/effects';
 import {asyncGetBooks} from "../../../api";
-import {actionTypes, bookFilterRequest, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
+import {actionTypes, fetchFilteredBooks, changeLoadingState, setErrorState} from "../../reducer/jsonServerReducer";
 
 //Запрос книг по фильтру и преобразование их в массив
 function* filterWorker(event){
@@ -11,14 +11,14 @@ function* filterWorker(event){
         yield put(setErrorState(data.message));
     }
     else {
-        yield put(bookFilterRequest(data));
+        yield put(fetchFilteredBooks(data));
     }
 
     yield put(changeLoadingState(false));
 }
 
 function* filterWatcher(){
-    yield takeEvery(actionTypes.filterUpdate, filterWorker);
+    yield takeEvery(actionTypes.updateFilter, filterWorker);
 }
 
 

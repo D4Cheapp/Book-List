@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {BookFormContext} from "../../../../utils/bookFormContext";
+import {CreateBookFormContext} from "../../../../utils/createBookFormContext";
 import clsx from "clsx";
 
 //Контейнер для названия и автора книги
 function TitleContainer() {
-    const {bookInfo, refs, style, isView, isTitleError} = useContext(BookFormContext);
+    const {bookInfo, refs, style, isView, isTitleError} = useContext(CreateBookFormContext);
 
     const [author, setAuthor] = useState('');
     const [title, setTitle] = useState('');

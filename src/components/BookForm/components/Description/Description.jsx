@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import selfStyle from './Description.module.scss';
-import {BookFormContext} from "../../../../utils/bookFormContext";
+import {CreateBookFormContext} from "../../../../utils/createBookFormContext";
 import clsx from "clsx";
 
 function Description() {
-    const {bookInfo, refs, isView, style} = useContext(BookFormContext);
+    const {bookInfo, refs, isView, style} = useContext(CreateBookFormContext);
 
     const [description, setDescription] = useState();
 

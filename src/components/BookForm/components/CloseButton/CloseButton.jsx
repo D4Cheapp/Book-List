@@ -6,8 +6,12 @@ import {useNavigate} from "react-router-dom";
 function CloseButton() {
     const navigate = useNavigate();
 
+    function onCloseClick() {
+        navigate('/');
+    }
+
     return (
-        <button type='button' className={style.close} onClick={() => navigate('/')}/>
+        <button type='button' className={style.close} onClick={onCloseClick}/>
     );
 }
 

@@ -17,7 +17,7 @@ function* deleteBookWorker(action){
 }
 
 function* deleteBookWatcher(){
-    yield takeEvery(actionTypes.deleteBookAction, deleteBookWorker);
+    yield takeEvery(actionTypes.deleteBook, deleteBookWorker);
 }
 
 export {deleteBookWatcher}

@@ -9,7 +9,7 @@ function ErrorMessage(){
     const dispatch = useDispatch();
 
     //Закрытие окна
-    function closeError() {
+    function onCloseClick() {
         dispatch(setErrorState(''));
     }
 
@@ -21,7 +21,7 @@ function ErrorMessage(){
                     {error}
                 </p>
 
-                <button className={style.close} onClick={closeError}/>
+                <button className={style.close} onClick={onCloseClick}/>
             </div>
 
         </div>

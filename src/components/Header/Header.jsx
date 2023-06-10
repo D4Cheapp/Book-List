@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import style from './Header.module.scss';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {filterUpdate, updateBooks} from "../../redux/reducer/jsonServerReducer";
+import {updateFilter, updateBooks} from "../../redux/reducer/jsonServerReducer";
 
 //Заголовок со строкой фильтрации
 function Header({setPage}) {
@@ -13,7 +13,7 @@ function Header({setPage}) {
     const searchParams = useSearchParams()[0].get('search');
 
     //Фильтрация по параметрам запроса
-    function searchParamsFilter() {
+    function filterSearchParams() {
         if (searchParams === ''){
             navigate('/');
             inputRef.current.value = '';
@@ -21,19 +21,19 @@ function Header({setPage}) {
             dispatch(updateBooks( {page: 0, replace: true}));
         }
         else if (searchParams){
-            dispatch(filterUpdate(searchParams));
+            dispatch(updateFilter(searchParams));
             inputRef.current.value = searchParams;
         }
     }
 
     //Перемещение на ссылку с параметром текущей фильтрации
-    function filterNavigate(event) {
+    function onFilterInput(event) {
         navigate({pathname: `/`, search: `?search=${event.target.value}`});
     }
 
     //После задержки в 0.5 секунд происходит фильтрация
     useEffect(() => {
-        const filterDelay = setTimeout(searchParamsFilter, 500);
+        const filterDelay = setTimeout(filterSearchParams, 500);
         return () => clearTimeout(filterDelay);
     }, [searchParams]);
 
@@ -44,7 +44,7 @@ function Header({setPage}) {
             </h1>
 
             <input className={style.input} defaultValue={searchParams} placeholder='Фильтр'
-                   type="text" onChange={filterNavigate} ref={inputRef}/>
+                   type="text" onChange={onFilterInput} ref={inputRef}/>
         </header>
     );
 }

@@ -6,9 +6,13 @@ import {useNavigate} from "react-router-dom";
 function AddBookButton() {
     const navigate = useNavigate();
 
+    function onAddClick(){
+        navigate('book/add');
+    }
+
     return (
         <div className={style.buttonContainer}>
-            <button className={style.addButton} onClick={() => navigate('book/add')}/>
+            <button className={style.addButton} onClick={onAddClick}/>
         </div>
     );
 }

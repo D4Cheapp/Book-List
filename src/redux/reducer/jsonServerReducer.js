@@ -1,27 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
-import creatingActionTypes from "../../utils/creatingActionTypes";
+import creatingActionTypes from "../../utils/createActionTypes";
 
 //Редьюсер запросов на сервер
-const jsonBookServerSlice = createSlice({
-   name: 'jsonBookServer',
+const booksSlice = createSlice({
+   name: 'booksSlice',
    initialState: { books: [], book: {}, isLoading: false, isFormCompleted: false, error: '', maxPage: 1 },
    reducers: {
         //Запрос всех книг с сервера
-        allBooksRequest(state, data) {
+        fetchBooks(state, data) {
             const replace = data.payload.replace;
             const books = replace ? [...data.payload.data] : [...state.books, ...data.payload.data];
             const maxPage = +data.payload.totalCount;
             return { ...state, books, maxPage };
-        },
-
-        //Запрос книг по фильтру
-        bookFilterRequest(state, filteredBooks) {
-            return { ...state, books: [...filteredBooks.payload.data] };
-        },
-
-        //Запрос книги по id
-        bookByIdRequest(state, book) {
-            return { ...state, book: book.payload };
         },
 
         //Обновление всех книг
@@ -30,13 +20,23 @@ const jsonBookServerSlice = createSlice({
         },
 
         //Запрос книг по фильтру
-        filterUpdate(state, filter) {
+        fetchFilteredBooks(state, filteredBooks) {
+            return { ...state, books: [...filteredBooks.payload.data] };
+        },
+
+        //Получение книг по фильтру
+        updateFilter(state, filter) {
             return { ...state, filter: filter.payload };
         },
 
         //Запрос книги по id
-        getBookById(state, bookId) {
+        fetchBookById(state, bookId) {
             return { ...state, bookId: bookId.payload };
+        },
+
+        //Получение книги по id
+        getBookById(state, book) {
+            return { ...state, book: book.payload };
         },
 
         //Добавление книги
@@ -50,7 +50,7 @@ const jsonBookServerSlice = createSlice({
         },
 
         //Запрос на удаление книги
-        deleteBookAction(state, bookId) {
+        deleteBook(state, bookId) {
             return { ...state, id: bookId.payload };
         },
 
@@ -71,8 +71,8 @@ const jsonBookServerSlice = createSlice({
    }
 });
 
-export const actionTypes = creatingActionTypes(jsonBookServerSlice.actions);
-export const {allBooksRequest, bookFilterRequest, bookByIdRequest, updateBooks,
-    filterUpdate, changeFormState, addBook, setErrorState, deleteBookAction,
-        editBook, getBookById, changeLoadingState} = jsonBookServerSlice.actions;
-export default jsonBookServerSlice.reducer;
+export const actionTypes = creatingActionTypes(booksSlice.actions);
+export const {fetchBooks, fetchFilteredBooks, getBookById, updateBooks,
+    updateFilter, changeFormState, addBook, setErrorState, deleteBook,
+        editBook, fetchBookById, changeLoadingState} = booksSlice.actions;
+export default booksSlice.reducer;

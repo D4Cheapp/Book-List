@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import InputMask from "react-input-mask";
-import {BookFormContext} from "../../../../utils/bookFormContext";
+import {CreateBookFormContext} from "../../../../utils/createBookFormContext";
 import clsx from "clsx";
 
 //Контейнер для дат начала и конца прочтения книги
 function DateContainer() {
-    const {bookInfo, refs, style, isView, isDateFromError, isDateToError} = useContext(BookFormContext);
+    const {bookInfo, refs, style, isView, isDateFromError, isDateToError} = useContext(CreateBookFormContext);
 
     const [dateFromValue, setDateFromValue] = useState('');
     const [dateToValue, setDateToValue] = useState('');

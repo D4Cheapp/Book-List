@@ -1,14 +1,14 @@
 import React, {useContext, useEffect} from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {addBook, changeFormState, deleteBookAction, editBook} from "../../../../redux/reducer/jsonServerReducer";
+import {addBook, changeFormState, deleteBook, editBook} from "../../../../redux/reducer/jsonServerReducer";
 import {useNavigate} from "react-router-dom";
-import {BookFormContext} from "../../../../utils/bookFormContext";
+import {CreateBookFormContext} from "../../../../utils/createBookFormContext";
 
 //Кнопки для удаления, сохранения и добавления книг
 function FormButtons() {
     const {bookInfo, refs, isAdd, isEdit, bookId,
-        setIsDateFromError, setIsDateToError, setIsTitleError} = useContext(BookFormContext);
+        setIsDateFromError, setIsDateToError, setIsTitleError} = useContext(CreateBookFormContext);
 
     const isLoading = useSelector(state => state.isLoading);
     const isFormCompleted = useSelector(state => state.isFormCompleted);
@@ -17,12 +17,12 @@ function FormButtons() {
     const navigate = useNavigate();
 
     //Удаление книги
-    function deleteBook() {
-        dispatch(deleteBookAction(+bookId));
+    function onDeleteClick() {
+        dispatch(deleteBook(+bookId));
     }
 
     //Валидация при добавлении новой книги
-    function formValidation() {
+    function validateForm() {
         const title = refs.titleRef.current?.value;
         const description = refs.descriptionRef.current?.value;
         const author = refs.authorRef.current?.value;
@@ -62,12 +62,12 @@ function FormButtons() {
 
     return (
         <div className={style.buttonContainer}>
-            <button type='button' className={style.add} onClick={formValidation}>
+            <button type='button' className={style.add} onClick={validateForm}>
                 {isAdd ? 'Добавить' : 'Сохранить'}
             </button>
 
             {isEdit &&
-                <button className={style.delete} type='button' onClick={deleteBook}>
+                <button className={style.delete} type='button' onClick={onDeleteClick}>
                     Удалить
                 </button>
             }
