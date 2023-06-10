@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import style from './Header.module.scss';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {updateFilter, updateBooks} from "../../redux/reducer/jsonServerReducer";
+import {updateFilter, updateBooks} from "../../redux/reducer/booksReducer";
 
 //Заголовок со строкой фильтрации
 function Header({setPage}) {

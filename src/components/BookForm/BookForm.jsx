@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {CloseButton, DateContainer, Description, FormButtons} from "./components";
 import {TitleContainer} from "./components/TitleContainer";
-import {fetchBookById} from "../../redux/reducer/jsonServerReducer";
+import {fetchBookById} from "../../redux/reducer/booksReducer";
 import {CreateBookFormContext} from "../../utils/createBookFormContext";
 
 //Форма для добавления / редактирования / просмотра книг

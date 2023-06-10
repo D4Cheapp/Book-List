@@ -3,11 +3,9 @@ import throwFetchError from "../utils/throwFetchError";
 
 //Запрос всех книг с возможностью добавления фильтра
 async function asyncGetBooks(filter, page) {
-    const paginationParams = '?' + querystring.stringify({'_limit': 5, '_page': page});
-    const filterParams = filter ? '&' + querystring.stringify({q: filter}) : '';
-
-    return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/` +
-        `books${paginationParams + filterParams}`)
+    const searchParams = querystring.stringify({'_limit': 5, '_page': page, q: filter});
+    return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books?${searchParams}`)
+            .then(response => response.ok ? response : throwFetchError('Ошибка получения книг'))
             .then(response => Promise.all([response.json(), response.headers.get('x-total-count')]))
             .then(([data, totalCount]) => { return { data, totalCount }})
             .catch(error => error)

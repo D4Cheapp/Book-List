@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import style from './FormButtons.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {addBook, changeFormState, deleteBook, editBook} from "../../../../redux/reducer/jsonServerReducer";
+import {addBook, changeFormState, deleteBook, editBook} from "../../../../redux/reducer/booksReducer";
 import {useNavigate} from "react-router-dom";
 import {CreateBookFormContext} from "../../../../utils/createBookFormContext";
 

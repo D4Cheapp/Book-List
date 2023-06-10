@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './ErrorMessage.module.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {setErrorState} from "../../redux/reducer/jsonServerReducer";
+import {setErrorState} from "../../redux/reducer/booksReducer";
 
 //Окно ошибки
 function ErrorMessage(){

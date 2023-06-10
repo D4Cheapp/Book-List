@@ -1,17 +1,17 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {jsonServerReducer} from "../reducer";
+import {booksReducer} from "../reducer";
 import createSagaMiddleware from 'redux-saga'
-import {rootSaga} from "../saga";
+import {booksSaga} from "../saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
 //Создание хранилища
 const store = configureStore({
-    reducer: jsonServerReducer,
+    reducer: booksReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 });
 
 //Запуск саги
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(booksSaga);
 
 export default store;

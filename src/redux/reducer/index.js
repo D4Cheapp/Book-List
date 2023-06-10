@@ -1,1 +1,1 @@
-export {default as jsonServerReducer} from './jsonServerReducer'
+export {default as booksReducer} from './booksReducer'

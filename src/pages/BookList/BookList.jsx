@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {BookTemplate} from "./BookTemplate";
 import {useSearchParams} from "react-router-dom";
 import clsx from "clsx";
-import {updateBooks} from "../../redux/reducer/jsonServerReducer";
+import {updateBooks} from "../../redux/reducer/booksReducer";
 import {AddBookButton, Header} from "../../components";
 
 //Контейнер с книгами

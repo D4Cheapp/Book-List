@@ -1,3 +1,2 @@
-import {rootSaga} from "./rootSaga";
-
-export {rootSaga}
+import {booksSaga} from "./booksSaga";
+export {booksSaga}
