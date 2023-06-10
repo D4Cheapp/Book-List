@@ -9,64 +9,63 @@ const booksSlice = createSlice({
         //Запрос всех книг с сервера
         fetchBooks(state, data) {
             const replace = data.payload.replace;
-            const books = replace ? [...data.payload.data] : [...state.books, ...data.payload.data];
-            const maxPage = +data.payload.totalCount;
-            return { ...state, books, maxPage };
+            state.books = replace ? [...data.payload.data] : [...state.books, ...data.payload.data];
+            state.maxPage = +data.payload.totalCount;
         },
 
         //Обновление всех книг
         updateBooks(state, pagination) {
-            return { ...state, page: pagination.payload.page};
+            state.page = pagination.payload.page;
         },
 
         //Запрос книг по фильтру
         fetchFilteredBooks(state, filteredBooks) {
-            return { ...state, books: [...filteredBooks.payload.data] };
+            state.books = [...filteredBooks.payload.data];
         },
 
         //Получение книг по фильтру
         updateFilter(state, filter) {
-            return { ...state, filter: filter.payload };
+            state.filter = filter.payload;
         },
 
         //Запрос книги по id
         fetchBookById(state, bookId) {
-            return { ...state, bookId: bookId.payload };
+            state.bookId = bookId.payload;
         },
 
         //Получение книги по id
         getBookById(state, book) {
-            return { ...state, book: book.payload };
+            state.book = book.payload;
         },
 
         //Добавление книги
         addBook(state, bookInfo) {
-            return { ...state, bookInfo: bookInfo.payload };
+            state.bookInfo = bookInfo.payload;
         },
 
         //Запрос на изменение книги
         editBook(state, bookInfo) {
-            return { ...state, bookInfo: bookInfo.payload };
+            state.bookInfo = bookInfo.payload;
         },
 
         //Запрос на удаление книги
         deleteBook(state, bookId) {
-            return { ...state, id: bookId.payload };
+            state.id = bookId.payload;
         },
 
         //Изменение состояния загрузки
         changeLoadingState(state, isLoading){
-            return { ...state, isLoading: isLoading.payload }
+            state.isLoading = isLoading.payload;
         },
 
         //Изменение состояния заполнения формы
         changeFormState(state, isFormCompleted){
-            return { ...state, isFormCompleted: isFormCompleted.payload }
+            state.isFormCompleted = isFormCompleted.payload;
         },
 
         //Изменение состояния ошибки
         setErrorState(state, error){
-            return { ...state, error: error.payload }
+            state.error = error.payload;
         },
    }
 });
