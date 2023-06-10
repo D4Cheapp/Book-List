@@ -1,5 +1,5 @@
 import React from 'react';
-import {BookForm} from "../../../components";
+import {BookForm} from "../../components";
 
 function EditBookPage() {
     return (

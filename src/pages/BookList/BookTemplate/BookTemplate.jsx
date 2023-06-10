@@ -9,7 +9,7 @@ function BookTemplate({bookInfo, loading}) {
 
     //Перемещение на страницу редактирования книги
     function onEditClick() {
-        navigate(`/book/edit/${bookInfo.id}`);
+        navigate(`/book/${bookInfo.id}/edit`);
     }
 
     //Перемещение на страницу просмотра книги
