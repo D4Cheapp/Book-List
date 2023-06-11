@@ -4,53 +4,24 @@ import creatingActionTypes from "../../utils/createActionTypes";
 //Редьюсер запросов на сервер
 const booksSlice = createSlice({
    name: 'booksSlice',
-   initialState: { books: [], book: {}, isLoading: false, isFormCompleted: false, error: '', maxPage: 1 },
+   initialState: { books: [], book: {}, isLoading: false,
+                    isFormCompleted: false, error: '', lastPage: 1, page: 0},
    reducers: {
         //Запрос всех книг с сервера
         fetchBooks(state, data) {
-            const replace = data.payload.replace;
-            state.books = replace ? [...data.payload.data] : [...state.books, ...data.payload.data];
-            state.maxPage = +data.payload.totalCount;
+            state.books = state.page === 1 || !state.page?
+                [...data.payload.data] : [...state.books, ...data.payload.data];
+            state.lastPage = +data.payload.totalCount;
         },
 
         //Обновление всех книг
         updateBooks(state, pagination) {
-            state.page = pagination.payload.page;
-        },
-
-        //Запрос книг по фильтру
-        fetchFilteredBooks(state, filteredBooks) {
-            state.books = [...filteredBooks.payload.data];
-        },
-
-        //Получение книг по фильтру
-        updateFilter(state, filter) {
-            state.filter = filter.payload;
-        },
-
-        //Запрос книги по id
-        fetchBookById(state, bookId) {
-            state.bookId = bookId.payload;
+            state.page = pagination?.payload?.page ?? 0;
         },
 
         //Получение книги по id
         getBookById(state, book) {
             state.book = book.payload;
-        },
-
-        //Добавление книги
-        addBook(state, bookInfo) {
-            state.bookInfo = bookInfo.payload;
-        },
-
-        //Запрос на изменение книги
-        editBook(state, bookInfo) {
-            state.bookInfo = bookInfo.payload;
-        },
-
-        //Запрос на удаление книги
-        deleteBook(state, bookId) {
-            state.id = bookId.payload;
         },
 
         //Изменение состояния загрузки
@@ -67,11 +38,23 @@ const booksSlice = createSlice({
         setErrorState(state, error){
             state.error = error.payload;
         },
+
+        //Запрос книги по id
+        fetchBookById(state, bookId) {},
+
+        //Добавление книги
+        addBook(state, bookInfo) {},
+
+        //Запрос на изменение книги
+        editBook(state, bookInfo) {},
+
+        //Запрос на удаление книги
+        deleteBook(state, bookId) {},
    }
 });
 
 export const actionTypes = creatingActionTypes(booksSlice.actions);
-export const {fetchBooks, fetchFilteredBooks, getBookById, updateBooks,
-    updateFilter, changeFormState, addBook, setErrorState, deleteBook,
+export const {fetchBooks, getBookById, updateBooks,
+        changeFormState, addBook, setErrorState, deleteBook,
         editBook, fetchBookById, changeLoadingState} = booksSlice.actions;
 export default booksSlice.reducer;

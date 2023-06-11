@@ -11,12 +11,12 @@ import {AddBookButton, Header} from "../../components";
 function BookList() {
     const books = useSelector(state => state.books);
     const isLoading = useSelector(state => state.isLoading);
-    const maxPage = useSelector(state => state.maxPage);
+    const lastPage = useSelector(state => state.lastPage);
 
     //Состояние пагинации и прокрутки страницы
     const [page, setPage] = useState(1);
 
-    const searchParams = useSearchParams()[0].get('search');
+    const filter = useSearchParams()[0].get('search');
     const dispatch = useDispatch();
 
     function onBookScroll(element){
@@ -24,26 +24,28 @@ function BookList() {
         const scrollTop = element.currentTarget.scrollTop;
         const innerHeight = element.currentTarget.offsetHeight;
 
-        if (scrollHeight - (scrollTop + innerHeight) < 20 && !isLoading && books.length < maxPage){
+        if (scrollHeight - (scrollTop + innerHeight) < 20 && !isLoading && books.length < lastPage){
             setPage(page + 1);
         }
     }
 
     //Загрузка книг при рендере компонента
     useEffect(() => {
-        dispatch(updateBooks({page, replace: true}));
+        if (!filter){
+            dispatch(updateBooks({page, filter}));
+        }
     }, []);
 
     //Загрузка книг при рендере компонента
     useEffect(() => {
         if (page > 1 && !isLoading){
-            dispatch(updateBooks({page, replace: false}));
+            dispatch(updateBooks({page, filter}));
         }
     }, [page]);
 
     return (
         <section className={style.listContainer}>
-            <Header setPage={setPage}/>
+            <Header setPage={setPage} page={page}/>
 
             <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !books})} onScroll={onBookScroll}>
                 {/*Если состояние книг не пустое*/}
@@ -53,21 +55,20 @@ function BookList() {
                     </>
                     :
                     <>
-                        {/*Если книг нет, но присутствует фильтрация*/}
-                        {searchParams ?
-                            <div className={style.errorContainer}>
-                                <p className={style.error}>По фильтру {searchParams} ничего не найдено</p>
-                            </div>
-                            :
-                            //Если идет загрузка книг
+                        {//Если идет загрузка книг
                             isLoading ?
-                                //Заполнение пустыми книгами для загрузки
-                                [...Array(7)].map((book, index) => <BookTemplate key={index} loading={true}/>)
-                                :
+                            //Заполнение пустыми книгами для загрузки
+                            [...Array(7)].map((book, index) => <BookTemplate key={index} loading={true}/>)
+                            :
+                            //Если книг нет, но присутствует фильтрация
+                            filter ?
+                                <div className={style.errorContainer}>
+                                    <p className={style.error}>По фильтру {filter} ничего не найдено</p>
+                                </div>
+                                   :
                                 <div className={style.errorContainer}>
                                     <p className={style.error}>Ничего не найдено</p>
                                 </div>
-
                         }
                     </>
                 }

@@ -1,6 +1,6 @@
 import {all, takeEvery, call, put} from 'redux-saga/effects';
-import {actionTypes, changeFormState, changeLoadingState, fetchBooks,
-    fetchFilteredBooks, getBookById, setErrorState} from "../reducer/booksReducer";
+import {actionTypes, changeFormState, changeLoadingState,
+    fetchBooks, getBookById, setErrorState} from "../reducer/booksReducer";
 import {asyncAddBook, asyncDeleteBook, asyncEditBook, asyncGetBookById, asyncGetBooks} from "../../api";
 
 //Запрос на добавление книги
@@ -24,12 +24,12 @@ function* updateBooksWatcher(){
     yield takeEvery(actionTypes.updateBooks, function* (action){
         yield put(changeLoadingState(true));
 
-        const data = yield call(asyncGetBooks, undefined, action.payload.page);
+        const data = yield call(asyncGetBooks, action.payload);
         if (data instanceof Error) {
             yield put(setErrorState(data.message));
         }
         else {
-            yield put(fetchBooks({...data, replace: action.payload.replace}));
+            yield put(fetchBooks({...data}));
         }
 
         yield put(changeLoadingState(false));
@@ -84,27 +84,10 @@ function* editBookWatcher(){
     });
 }
 
-//Запрос книг по фильтру и преобразование их в массив
-function* filterWatcher(){
-    yield takeEvery(actionTypes.updateFilter, function* (action){
-        yield put(changeLoadingState(true));
-
-        const data = yield call(asyncGetBooks, action.payload);
-        if (data instanceof Error) {
-            yield put(setErrorState(data.message));
-        }
-        else {
-            yield put(fetchFilteredBooks(data));
-        }
-
-        yield put(changeLoadingState(false));
-    });
-}
-
 //Создание корневой саги со всеми вотчерами
 function* booksSaga(){
-    yield all([updateBooksWatcher(), addBookWatcher(), deleteBookWatcher(),
-                        editBookWatcher(), filterWatcher(), getBookByIdWatcher()]);
+    yield all([updateBooksWatcher(), addBookWatcher(),
+            deleteBookWatcher(), editBookWatcher(), getBookByIdWatcher()]);
 }
 
 export {booksSaga}
