@@ -40,16 +40,16 @@ const booksSlice = createSlice({
         },
 
         //Запрос книги по id
-        fetchBookById(state, bookId) {},
+        fetchBookById(bookId) {},
 
         //Добавление книги
-        addBook(state, bookInfo) {},
+        addBook(bookInfo) {},
 
         //Запрос на изменение книги
-        editBook(state, bookInfo) {},
+        editBook(bookInfo) {},
 
         //Запрос на удаление книги
-        deleteBook(state, bookId) {},
+        deleteBook(bookId) {},
    }
 });
 

@@ -1,26 +1,16 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {CreateBookFormContext} from "../../../../utils/createBookFormContext";
+import React from 'react';
+import style from '../../BookForm.module.scss';
 import clsx from "clsx";
 
 //Контейнер для названия и автора книги
-function TitleContainer() {
-    const {bookInfo, refs, style, isView, isTitleError} = useContext(CreateBookFormContext);
-
-    const [author, setAuthor] = useState('');
-    const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        setAuthor(bookInfo.title ? bookInfo.author : '');
-        setTitle(bookInfo.title ? bookInfo.title : '');
-    }, [bookInfo]);
-
+function TitleContainer({onAuthorChange, onTitleChange, authorValue, titleValue, isReadonly, isTitleError}) {
     return (
         <div className={style.inputContainer}>
             <label className={style.label}>
                 Название книги
 
-                <input className={style.input} type="text" ref={refs.titleRef} disabled={isView}
-                       defaultValue={title} readOnly={isView}/>
+                <input className={style.input} type="text" disabled={isReadonly} onInput={onTitleChange}
+                       defaultValue={titleValue} readOnly={isReadonly}/>
 
                 <p className={clsx(style.error, {[style.hiddenError]: !isTitleError})}>
                     Введите название книги
@@ -30,8 +20,8 @@ function TitleContainer() {
             <label className={style.label}>
                 Автор книги
 
-                <input className={style.input} type="text" ref={refs.authorRef} disabled={isView}
-                       defaultValue={author} readOnly={isView}/>
+                <input className={style.input} type="text" disabled={isReadonly} onInput={onAuthorChange}
+                       defaultValue={authorValue} readOnly={isReadonly}/>
             </label>
         </div>
     );
