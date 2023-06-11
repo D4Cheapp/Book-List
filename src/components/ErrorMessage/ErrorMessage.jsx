@@ -8,6 +8,8 @@ function ErrorMessage(){
     const error = useSelector(state => state.error);
     const dispatch = useDispatch();
 
+    if (!error) return null;
+
     //Закрытие окна
     function onCloseClick() {
         dispatch(setErrorState(''));
@@ -15,7 +17,6 @@ function ErrorMessage(){
 
     return (
         <div className={style.container}>
-
             <div className={style.errorContainer}>
                 <p className={style.error}>
                     {error}
@@ -23,7 +24,6 @@ function ErrorMessage(){
 
                 <button className={style.close} onClick={onCloseClick}/>
             </div>
-
         </div>
     );
 }
