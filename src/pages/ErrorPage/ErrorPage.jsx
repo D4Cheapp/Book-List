@@ -5,13 +5,17 @@ import {useNavigate} from "react-router-dom";
 function ErrorPage() {
     const navigate = useNavigate();
 
+    function onBackClick() {
+        navigate('/');
+    }
+
     return (
         <div className={style.container}>
             <p className={style.title}>
                 Страница не найдена
             </p>
 
-            <button className={style.button} onClick={() => navigate('/')}>
+            <button className={style.button} onClick={onBackClick}>
                 Вернуться на главную страницу
             </button>
         </div>

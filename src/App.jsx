@@ -1,15 +1,16 @@
 import React from 'react';
 import {ErrorMessage} from "./components";
-import {useSelector} from "react-redux";
-import {Outlet} from "react-router-dom";
+import {Provider} from "react-redux";
+import {RouterProvider} from "react-router-dom";
+import {store} from "./redux/store";
 
-function App() {
-    const isError = useSelector(state => state.error);
-
+function App({router}) {
     return (
         <>
-            { isError !== '' && <ErrorMessage/> }
-            <Outlet/>
+            <Provider store={store}>
+                <ErrorMessage/>
+                <RouterProvider router={router}/>
+            </Provider>
         </>
     );
 }

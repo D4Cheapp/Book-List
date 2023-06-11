@@ -1,23 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
+import style from '../../BookForm.module.scss';
 import selfStyle from './Description.module.scss';
-import {BookFormContext} from "../../../../utils/bookFormContext";
 import clsx from "clsx";
 
-function Description() {
-    const {bookInfo, refs, isView, style} = useContext(BookFormContext);
-
-    const [description, setDescription] = useState();
-
-    useEffect(() => {
-        setDescription(bookInfo.description ? bookInfo.description : '')
-    }, [bookInfo]);
-
+function Description({descriptionValue, isReadonly, onDescriptionChange}) {
     return (
         <label className={clsx(style.label, selfStyle.description)}>
             Описание
 
-            <textarea className={selfStyle.input} ref={refs.descriptionRef}
-                      disabled={isView} defaultValue={description} readOnly={isView}/>
+            <textarea className={selfStyle.input} disabled={isReadonly} onInput={onDescriptionChange}
+                  defaultValue={descriptionValue} readOnly={isReadonly}/>
         </label>
     );
 }

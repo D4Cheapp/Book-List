@@ -1,41 +1,42 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import style from './Header.module.scss';
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {filterUpdate, updateBooks} from "../../redux/reducer/jsonServerReducer";
+import {updateBooks} from "../../redux/reducer/booksReducer";
 
 //Заголовок со строкой фильтрации
-function Header({setPage}) {
+function Header({ setPage, page }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const inputRef = useRef();
-    const searchParams = useSearchParams()[0].get('search');
+    const [inputValue, setInputValue] = useState();
+    const filter = useSearchParams()[0].get('search');
 
     //Фильтрация по параметрам запроса
-    function searchParamsFilter() {
-        if (searchParams === ''){
+    function filterSearchParams() {
+        if (inputValue === ''){
             navigate('/');
             inputRef.current.value = '';
             setPage(0);
-            dispatch(updateBooks( {page: 0, replace: true}));
+            dispatch(updateBooks());
         }
-        else if (searchParams){
-            dispatch(filterUpdate(searchParams));
-            inputRef.current.value = searchParams;
+        else if (inputValue){
+            navigate({pathname: `/`, search: `?search=${inputValue}`});
+            dispatch(updateBooks({page, filter: inputValue}));
         }
     }
 
     //Перемещение на ссылку с параметром текущей фильтрации
-    function filterNavigate(event) {
-        navigate({pathname: `/`, search: `?search=${event.target.value}`});
+    function onFilterInput(event) {
+        setInputValue(event.target.value);
     }
 
     //После задержки в 0.5 секунд происходит фильтрация
     useEffect(() => {
-        const filterDelay = setTimeout(searchParamsFilter, 500);
+        const filterDelay = setTimeout(filterSearchParams, 500);
         return () => clearTimeout(filterDelay);
-    }, [searchParams]);
+    }, [inputValue]);
 
     return (
         <header className={style.header}>
@@ -43,8 +44,8 @@ function Header({setPage}) {
                 Book list
             </h1>
 
-            <input className={style.input} defaultValue={searchParams} placeholder='Фильтр'
-                   type="text" onChange={filterNavigate} ref={inputRef}/>
+            <input className={style.input} defaultValue={filter} placeholder='Фильтр'
+                   type="text" onChange={onFilterInput} ref={inputRef}/>
         </header>
     );
 }

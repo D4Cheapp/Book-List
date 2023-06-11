@@ -8,12 +8,12 @@ function BookTemplate({bookInfo, loading}) {
     const navigate = useNavigate();
 
     //Перемещение на страницу редактирования книги
-    function navigateToEdit() {
-        navigate(`/book/edit/${bookInfo.id}`);
+    function onEditClick() {
+        navigate(`/book/${bookInfo.id}/edit`);
     }
 
     //Перемещение на страницу просмотра книги
-    function navigateToView() {
+    function onViewClick() {
         navigate(`/book/${bookInfo.id}`);
     }
 
@@ -34,10 +34,10 @@ function BookTemplate({bookInfo, loading}) {
                 </div>
 
                 {/*Кнопка редактирования*/}
-                <button className={clsx(style.button, style.edit)} onClick={navigateToEdit}/>
+                <button className={clsx(style.button, style.edit)} onClick={onEditClick}/>
 
                 {/*Кнопка быстрого просмотра*/}
-                <button className={clsx(style.button, style.view)} onClick={navigateToView}/>
+                <button className={clsx(style.button, style.view)} onClick={onViewClick}/>
             </>
             }
 
