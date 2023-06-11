@@ -24,7 +24,7 @@ function BookList() {
         const scrollTop = element.currentTarget.scrollTop;
         const innerHeight = element.currentTarget.offsetHeight;
 
-        if (scrollHeight - (scrollTop + innerHeight) < 20 && !isLoading && books.length < lastPage){
+        if (scrollHeight - (scrollTop + innerHeight) < 20 && !isLoading && page < lastPage){
             setPage(page + 1);
         }
     }

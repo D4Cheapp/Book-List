@@ -11,7 +11,7 @@ const booksSlice = createSlice({
         fetchBooks(state, data) {
             state.books = state.page === 1 || !state.page?
                 [...data.payload.data] : [...state.books, ...data.payload.data];
-            state.lastPage = +data.payload.totalCount;
+            state.lastPage = +data.payload.totalCount.split('_page=').at(-1).slice(0,-15);
         },
 
         //Обновление всех книг
