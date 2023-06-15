@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import style from './BookList.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {BookTemplate} from "./BookTemplate";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import clsx from "clsx";
-import {updateBooks} from "../../redux/reducer/booksReducer";
+import {fetchBooks} from "../../redux/reducer/booksReducer";
 import {AddBookButton, Header} from "../../components";
 
 //Контейнер с книгами
@@ -13,11 +13,14 @@ function BookList() {
     const isLoading = useSelector(state => state.isLoading);
     const lastPage = useSelector(state => state.lastPage);
 
+    const filter = useSearchParams()[0].get('search');
+    const bookListRef = useRef();
+
     //Состояние пагинации и прокрутки страницы
     const [page, setPage] = useState(1);
 
-    const filter = useSearchParams()[0].get('search');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function onBookScroll(element){
         const scrollHeight = element.currentTarget.scrollHeight;
@@ -31,24 +34,36 @@ function BookList() {
 
     //Загрузка книг при рендере компонента
     useEffect(() => {
-        if (!filter){
-            dispatch(updateBooks({page, filter}));
-        }
+        dispatch(fetchBooks({page, filter}));
     }, []);
 
     //Загрузка книг при рендере компонента
     useEffect(() => {
         if (page > 1 && !isLoading){
-            dispatch(updateBooks({page, filter}));
+            dispatch(fetchBooks({page, filter}));
         }
     }, [page]);
 
+    useEffect(() => {
+        if (filter === ''){
+            navigate('/');
+            bookListRef.current.scrollTop = 0;
+            dispatch(fetchBooks({page: 1}));
+        }
+        else if (filter){
+            bookListRef.current.scrollTop = 0;
+            navigate({pathname: `/`, search: `?search=${filter}`});
+            dispatch(fetchBooks({page: 1, filter: filter}));
+        }
+    }, [filter]);
+
     return (
         <section className={style.listContainer}>
-            <Header setPage={setPage} page={page}/>
+            <Header/>
 
-            <div className={clsx(style.bookContainer, {[style.bookContainerLoading]: !books})} onScroll={onBookScroll}>
-                {/*Если состояние книг не пустое*/}
+            <div className={clsx(style.bookContainer,
+                {[style.bookContainerLoading]: !books})} onScroll={onBookScroll} ref={bookListRef}>
+
                 {books?.length > 0 ?
                     <>
                         {books?.map(book => <BookTemplate key={book.id} bookInfo={book}/>)}
