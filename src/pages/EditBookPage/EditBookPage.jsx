@@ -23,7 +23,7 @@ function EditBookPage() {
     }
 
     return (
-        <BookForm model={model} onSubmit={onSubmit} submitButtonTitle={'Сохранить'} withDeleteButton={true}/>
+        <BookForm model={model} onSubmit={onSubmit} submitButtonTitle={'Сохранить'} withDeleteButton/>
     );
 }
 

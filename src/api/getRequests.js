@@ -7,7 +7,7 @@ async function asyncGetBooks(data) {
     return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books?${searchParams}`)
             .then(response => response.ok ? response : throwFetchError('Ошибка получения книг'))
             .then(response => Promise.all([response.json(), response.headers.get('link')]))
-            .then(([data, totalCount]) => { return { data, totalCount }})
+            .then(([data, pagination]) => { return { data, pagination }})
             .catch(error => error)
 }
 
