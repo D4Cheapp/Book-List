@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 import {editBook, fetchBookById} from "../../redux/reducer/booksReducer";
 
 function EditBookPage() {
-    const model = useSelector(state => state.book);
+    const model = useSelector(state => state.book.book);
     const bookId = useParams().bookId;
     const dispatch = useDispatch();
 

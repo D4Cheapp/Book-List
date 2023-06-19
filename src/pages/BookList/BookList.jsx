@@ -9,9 +9,9 @@ import {AddBookButton, Header} from "../../components";
 
 //Контейнер с книгами
 function BookList() {
-    const books = useSelector(state => state.books);
-    const isLoading = useSelector(state => state.isLoading);
-    const lastPage = useSelector(state => state.lastPage);
+    const books = useSelector(state => state.book.books);
+    const isLoading = useSelector(state => state.book.isLoading);
+    const lastPage = useSelector(state => state.book.lastPage);
 
     const filter = useSearchParams()[0].get('search');
     const bookListRef = useRef();
