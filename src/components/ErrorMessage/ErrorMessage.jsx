@@ -5,7 +5,7 @@ import {setErrorState} from "../../redux/reducer/booksReducer";
 
 //Окно ошибки
 function ErrorMessage(){
-    const error = useSelector(state => state.error);
+    const error = useSelector(state => state.book.error);
     const dispatch = useDispatch();
 
     if (!error) return null;

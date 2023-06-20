@@ -1,4 +1,5 @@
 import {all, takeEvery, call, put} from 'redux-saga/effects';
+import {push} from "redux-first-history";
 import {actionTypes, changeLoadingState,
     fetchBooksSuccess, fetchBookByIdSuccess, setErrorState} from "../reducer/booksReducer";
 import {asyncAddBook, asyncDeleteBook, asyncEditBook, asyncGetBookById, asyncGetBooks} from "../../api";
@@ -12,7 +13,7 @@ function* addBookSaga(action){
         yield put(setErrorState(data.message));
     }
     else {
-        window.location.href = '/';
+        yield put(push('/'));
     }
 
     yield put(changeLoadingState(false));
@@ -56,7 +57,7 @@ function* deleteBookSaga(action){
         yield put(setErrorState(data.message));
     }
     else {
-        window.location.href = '/';
+        yield put(push('/'));
     }
 
 
@@ -72,7 +73,7 @@ function* editBookSaga(action){
         yield put(setErrorState(data.message));
     }
     else {
-        window.location.href = '/';
+        yield put(push('/'));
     }
 
     yield put(changeLoadingState(false));

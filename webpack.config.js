@@ -3,7 +3,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports={
-    //Режим проекта и точка входа
     mode: 'development',
     entry: {
         main: path.resolve(__dirname,'./src/index.jsx'),
@@ -14,14 +13,12 @@ module.exports={
     stats: {
         children: true,
     },
-    //Настройки сервера
     devServer: {
         watchFiles: [path.resolve(__dirname,"src")],
         historyApiFallback: true,
         port:3000,
         hot:true,
     },
-    //Выходной main файл
     output: {
         filename: `[name].js`,
         path: path.resolve(__dirname,'docs')
@@ -37,7 +34,6 @@ module.exports={
                 use: ["babel-loader"],
             },
             {
-                //Компиляция обработка scss и css
                 test: /\.(scss|css)$/,
                 use: ['style-loader', 'css-loader', 'resolve-url-loader', {
                     loader: 'sass-loader',
