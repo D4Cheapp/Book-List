@@ -6,26 +6,24 @@ const booksSlice = createSlice({
    name: 'booksSlice',
    initialState: { books: [], book: {}, isLoading: false, error: '', lastPage: 1, page: 1},
    reducers: {
+       //Обновление всех книг
+       fetchBooks(state, pagination) {},
+
        //Запрос всех книг с сервера
        fetchBooksSuccess(state, data) {
-           state.books = state.page === 1 || !state.page?
-               [...data.payload.data] : [...state.books, ...data.payload.data];
+           const page = data.payload.page;
+           state.books = page === 1 || !page ? [...data.payload.data] : [...state.books, ...data.payload.data];
            const lastPageString = data.payload.pagination.split('_page=').at(-1);
            state.lastPage = +lastPageString.split(lastPageString.indexOf('&') !== -1 ? '&' : '>')[0];
        },
 
-       //Обновление всех книг
-       fetchBooks(state, pagination) {
-           state.page = pagination?.payload?.page ?? 1;
-       },
+       //Запрос книги по id
+       fetchBookById(bookId) {},
 
        //Получение книги по id
        fetchBookByIdSuccess(state, book) {
            state.book = book.payload;
        },
-
-       //Запрос книги по id
-       fetchBookById(bookId) {},
 
        //Изменение состояния загрузки
        changeLoadingState(state, isLoading){

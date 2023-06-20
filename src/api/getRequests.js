@@ -2,12 +2,12 @@ import querystring from "query-string";
 import throwFetchError from "../utils/throwFetchError";
 
 //Запрос всех книг с возможностью добавления фильтра
-async function asyncGetBooks(data) {
-    const searchParams = querystring.stringify({'_limit': 7, '_page': data?.page, q: data?.filter});
+async function asyncGetBooks(props) {
+    const searchParams = querystring.stringify({'_limit': 7, '_page': props?.page, q: props?.filter});
     return await fetch(`https://my-json-server.typicode.com/D4Cheapp/Book-List/books?${searchParams}`)
             .then(response => response.ok ? response : throwFetchError('Ошибка получения книг'))
             .then(response => Promise.all([response.json(), response.headers.get('link')]))
-            .then(([data, pagination]) => { return { data, pagination }})
+            .then(([data, pagination]) => { return { data, pagination, page: props?.page }})
             .catch(error => error)
 }
 

@@ -13,7 +13,7 @@ function Header() {
     }
 
     function applyFilter() {
-        navigate({pathname: `/`, search: `?search=${filterInputValue}`});
+        navigate({pathname: `/`, search: filterInputValue ? `?search=${filterInputValue}` : ''});
     }
 
     //После задержки в 0.5 секунд происходит фильтрация
