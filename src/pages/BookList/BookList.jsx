@@ -45,16 +45,10 @@ function BookList() {
     }, [page]);
 
     useEffect(() => {
-        if (filter === ''){
-            navigate('/');
-            bookListRef.current.scrollTop = 0;
-            dispatch(fetchBooks({page: 1}));
-        }
-        else if (filter){
-            bookListRef.current.scrollTop = 0;
-            navigate({pathname: `/`, search: `?search=${filter}`});
-            dispatch(fetchBooks({page: 1, filter: filter}));
-        }
+        bookListRef.current.scrollTop = 0;
+        navigate({pathname: `/`, search: filter ? `?search=${filter}`: ''});
+        setPage(1);
+        dispatch(fetchBooks({page: 1, filter}));
     }, [filter]);
 
     return (
